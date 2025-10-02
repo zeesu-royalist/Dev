@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Services | JBH Tech Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reuse all existing styles from the main page */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Navigation Bar - Same as main page */
+        .navbar {
+            background-color: #ffffff;
+            padding: 12px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            height: 70px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 75px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0a0a0a;
+            margin-left: 10px;
+        }
+        
+        .logo-accent {
+            color: #4a6cf7;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin: 0 15px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #0a0a0a;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+            font-size: 16px;
+            padding: 5px 0;
+            margin-right:75px;
+        }
+        
+        .nav-links a:hover {
+            color: #4a6cf7;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #4a6cf7;
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        /* Services Dropdown */
+        .services-dropdown {
+            position: relative;
+        }
+        
+        .services-dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 800px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+/*          display: none;  Fixed by Zeesu */
+            z-index: 1000;
+            padding: 20px;
+            margin-top: 15px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        
+        .services-dropdown:hover .services-dropdown-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .dropdown-column {
+            padding: 10px;
+        }
+        
+        .dropdown-heading {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4a6cf7;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dropdown-heading i {
+            margin-right: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .dropdown-list {
+            list-style: none;
+        }
+        
+        .dropdown-list li {
+            margin-bottom: 10px;
+        }
+        
+        .dropdown-list a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dropdown-list a:hover {
+            background-color: #f0f5ff;
+            color: #4a6cf7;
+            transform: translateX(5px);
+        }
+        
+        .dropdown-list a i {
+            margin-right: 8px;
+            font-size: 0.9rem;
+            color: #4a6cf7;
+        }
+        
+        .jbh-search-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-right: 20px;
+            color: #0a0a0a;
+            transition: color 0.3s;
+        }
+        
+        .jbh-search-btn:hover {
+            color: #4a6cf7;
+        }
+        
+        .jbh-contact-btn {
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .jbh-contact-btn:hover {
+            background-color: #3a5cd8;
+            transform: translateY(-2px);
+        }
+
+/* Mobile menu styles */
+.jbh-hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+}
+
+.jbh-hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 3px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+/* Search Modal */
+.jbh-search-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.jbh-search-container {
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+.jbh-search-input {
+    width: 100%;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.jbh-close-search {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Mobile nav actions */
+.jbh-mobile-nav-actions {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.jbh-mobile-nav-actions .jbh-search-btn {
+    background: none;
+    border: 2px solid #4a6cf7;
+    color: #4a6cf7;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    max-width: 250px;
+}
+
+.jbh-mobile-nav-actions .jbh-search-btn:hover {
+    background: #4a6cf7;
+    color: white;
+}
+
+.jbh-mobile-nav-actions .jbh-contact-btn {
+    background-color: #4a6cf7;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    max-width: 250px;
+    font-size: 1rem;
+}
+
+.jbh-mobile-nav-actions .jbh-contact-btn:hover {
+    background-color: #3a5cd8;
+}
+
+/* Responsive design */
+@media screen and (max-width: 1024px) {
+    .nav-links li {
+        margin: 0 10px;
+    }
+    
+    .nav-links a {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .navbar {
+        padding: 10px 5%;
+        position: relative;
+        z-index: 1000;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding-top: 40px;
+        transition: left 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        width: 80%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        font-size: 18px;
+        margin-right: 0;
+        display: block;
+        padding: 15px;
+        width: 100%;
+        color: #333;
+        border-bottom: 1px solid #f0f0f0;
+        transition: all 0.3s;
+    }
+
+    .nav-links a:hover {
+        background-color: #f8f9fa;
+        color: #4a6cf7;
+    }
+
+    .jbh-hamburger {
+        display: flex;
+    }
+
+    .jbh-hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .jbh-hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .jbh-hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    .nav-actions {
+        display: none;
+    }
+
+    .jbh-mobile-nav-actions {
+        display: flex;
+    }
+    
+    /* Fix for dropdown on mobile */
+    .services-dropdown-content {
+        position: static;
+        width: 100%;
+        display: none;
+        margin-top: 15px;
+        opacity: 1;
+        transform: none;
+        box-shadow: none;
+        padding: 0;
+        background: #f9f9f9;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .services-dropdown.active .services-dropdown-content {
+        display: block;
+    }
+    
+    .dropdown-column {
+        padding: 15px;
+    }
+    
+    .dropdown-heading {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        color: #4a6cf7;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 10px;
+    }
+    
+    .dropdown-list {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .dropdown-list li {
+        margin-bottom: 5px;
+    }
+    
+    .dropdown-list a {
+        padding: 10px 15px;
+        font-size: 0.95rem;
+        color: #555;
+        border-radius: 5px;
+        transition: all 0.3s;
+    }
+    
+    .dropdown-list a:hover {
+        background-color: #eef2ff;
+        color: #4a6cf7;
+        transform: translateX(5px);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .nav-links {
+        padding-top: 20px;
+    }
+    
+    .nav-links li {
+        width: 90%;
+    }
+    
+    .nav-links a {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    .jbh-mobile-nav-actions {
+        gap: 10px;
+        padding: 0 15px;
+    }
+    
+    .jbh-mobile-nav-actions .jbh-search-btn,
+    .jbh-mobile-nav-actions .jbh-contact-btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+    
+    .dropdown-column {
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar {
+        padding: 10px 3%;
+    }
+    
+    .nav-links {
+        padding-top: 15px;
+    }
+    
+    .nav-links li {
+        width: 95%;
+    }
+    
+    .nav-links a {
+        font-size: 15px;
+        padding: 10px;
+    }
+    
+    .jbh-mobile-nav-actions {
+        margin-top: 20px;
+    }
+}
+        /* SEO Hero Section */
+        .seo-hero {
+            background: linear-gradient(rgba(10,10,10,0.8), rgba(10,10,10,0.8)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1115&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 5% 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+        
+        .seo-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .seo-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #e0e0e0;
+        }
+        
+        .seo-hero-accent {
+            color: #4a6cf7;
+        }
+        
+        /* SEO Content Sections */
+        .seo-section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            
+        }
+        
+        .seo-section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #ffffff;
+            position: relative;
+            content: '→';
+            
+        }
+        
+        .seo-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #4a6cf7;
+            border-radius: 2px;
+        }
+        
+        .seo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+            
+        }
+       
+        
+        .seo-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .seo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+        
+        .seo-card-icon {
+            font-size: 3rem;
+            color: #4a6cf7;
+            margin-bottom: 20px;
+        }
+        
+        .seo-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .seo-card p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+        
+        .seo-card-hidden {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+        }
+        
+        .seo-card-hidden ul {
+            text-align: left;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+        
+        .seo-card-hidden li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .seo-card-hidden li:before {
+            content: '✓';
+            color: #4a6cf7;
+            position: absolute;
+            left: 0;
+        }
+        
+        .seo-learn-btn {
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .seo-learn-btn:hover {
+            background-color: #3a5cd8;
+        }
+        
+        /* SEO Process Section */
+        .seo-process {
+            background: #1a1a1a;
+            padding: 80px 5%;
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+            
+        }
+        
+        .process-step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4a6cf7, #3a5cd8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            color: white;
+            
+        }
+        
+        .process-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .process-step p {
+            color: #b0b0b0;
+        }
+        .process-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #4a6cf7;
+        }
+        /* SEO Results Section */
+        .seo-results {
+            padding: 80px 5%;
+            text-align: center;
+        }
+        
+        .results-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .result-item {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+        
+        .result-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4a6cf7;
+            margin-bottom: 10px;
+        }
+        
+        .result-text {
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+        
+        /* CTA Section */
+        .seo-cta {
+            background: linear-gradient(90deg, #4a6cf7, #8a94a6);
+            padding: 80px 5%;
+            text-align: center;
+        }
+        
+        .seo-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        
+        .seo-cta p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #e0e0e0;
+        }
+        
+        /* Footer - Same as main page */
+        footer {
+            background: #1a1a1a;
+            padding: 40px;
+            text-align: center;
+            color: #b0b0b0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: left;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px;
+        }
+        
+        .footer-column h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #4a6cf7;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            color: #ffffff;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #4a6cf7;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+        }
+         /* Responsive Design */
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px;
+                transition: left 0.3s ease;
+                overflow-y: auto;
+                gap: 15px;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .jbh-mobile-nav-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            .jbh-mobile-nav-actions button {
+                width: 100%;
+            }
+
+            .jbh-hamburger {
+                display: flex;
+            }
+
+            .services-dropdown-content {
+                position: static;
+                display: none;
+                flex-direction: column;
+                min-width: auto;
+                padding: 20px;
+                margin-top: 10px;
+                background: rgba(26, 26, 26, 0.8);
+            }
+
+            .services-dropdown.active .services-dropdown-content {
+                display: flex;
+            }
+
+            .carousel-container {
+                height: 60vh;
+            }
+
+            .slide-content {
+                margin: 0 5%;
+                padding: 20px;
+            }
+
+            .slide-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-title, .k-heading {
+                font-size: 2rem;
+            }
+
+            .services-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .k-floating-box {
+                position: relative;
+                margin: 15px 0;
+                animation: none;
+                left: 0 !important;
+                right: 0 !important;
+                top: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .slide-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .text-item {
+                font-size: 1rem;
+            }
+
+            .k-title {
+                font-size: 1.8rem;
+            }
+
+            .contact-info h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .seo-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .seo-section-title {
+                font-size: 2rem;
+            }
+            
+            .process-step {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar - Same as main page -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html"><img src="image/logo (2).png" alt="logo"></a>
+
+            <span class="logo-text"> <span class="logo-accent"></span></span>
+        </div>
+    
+        <ul class="nav-links">
+            <li><a href="about.html">About Us</a></li>
+            <li class="services-dropdown">
+                <a href="#">Services <i class="fa fa-caret-down"></i></a>
+                <div class="services-dropdown-content">
+                    <!-- Website Development Column -->
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-laptop-code"></i> Website Development
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="Custom website.html"><i class="fas fa-code"></i> Custom Website Development</a></li>
+                            <li><a href="ecommerce.html"><i class="fas fa-shopping-cart"></i> E-commerce Solutions</a></li>
+                            <li><a href="web app .html"><i class="fas fa-cogs"></i>Web Application Development</a></li>
+                
+                        </ul>
+                    </div>
+                    
+                    <!-- Design Column -->
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-paint-brush"></i> Design
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="Graphic.html"><i class="fas fa-palette"></i> Graphics Design</a></li>
+                            <li><a href="ui.html"><i class="fas fa-layer-group"></i> UI/UX Design</a></li>
+                            
+                          
+                        </ul>
+                    </div>
+                    
+                    <!-- Marketing Column -->
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-chart-line"></i> Marketing
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="seo.html"><i class="fas fa-search"></i> SEO Services</a></li>
+                            <li><a href="ads.html"><i class="fab fa-facebook"></i> Social Media Marketing</a></li>
+                            
+                            
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="project Grid.html">Project Grid</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+    
+            <!-- Mobile Actions -->
+            <div class="jbh-mobile-nav-actions">
+                <button class="jbh-search-btn"><i class="fas fa-search"></i> Search</button>
+                <button class="jbh-contact-btn" onclick="window.location.href='contact.html'">Contact Us</button>
+            </div>
+        </ul>
+    
+        <div class="nav-actions">
+            <button class="jbh-search-btn"><i class="fas fa-search"></i></button>
+            <button class="jbh-contact-btn" onclick="window.location.href='contact.html'">Contact Us</button>
+        </div>
+    
+        <div class="jbh-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    
+    <!-- Search Modal - Same as main page -->
+    <div class="jbh-search-modal">
+        <div class="jbh-search-container">
+            <input type="text" class="jbh-search-input" placeholder="Search...">
+            <button class="jbh-close-search"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- SEO Hero Section -->
+    <section class="seo-hero">
+        <h1>Professional <span class="seo-hero-accent">SEO Services</span></h1>
+        <p>Boost your online visibility, drive targeted traffic, and increase conversions with our comprehensive SEO strategies tailored to your business goals.</p>
+        <button class="jbh-contact-btn">Get Free SEO Audit</button>
+    </section>
+
+    <!-- SEO Services Section -->
+    <section class="seo-section">
+        <h2 class="seo-section-title">Our SEO Services</h2>
+        
+        <div class="seo-grid">
+            <div class="seo-card">
+                <div class="seo-card-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <h3>On-Page SEO</h3>
+                <p>Optimize your website's content and HTML source code to rank higher and earn more relevant traffic.</p>
+                <div class="seo-card-hidden" id="onpage-details">
+                    <ul>
+                        <li>Keyword research and optimization</li>
+                        <li>Content optimization and creation</li>
+                        <li>Meta tags and title optimization</li>
+                        <li>URL structure optimization</li>
+                        <li>Header tag optimization</li>
+                        <li>Image optimization with alt tags</li>
+                    </ul>
+                    <button class="seo-learn-btn" onclick="hideDetails('onpage')">Show Less</button>
+                </div>
+                <button class="seo-learn-btn" onclick="showDetails('onpage')">Learn More</button>
+            </div>
+            
+            <div class="seo-card">
+                <div class="seo-card-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <h3>Off-Page SEO</h3>
+                <p>Build your website's reputation and authority through quality backlinks and brand mentions.</p>
+                <div class="seo-card-hidden" id="offpage-details">
+                    <ul>
+                        <li>Link building strategies</li>
+                        <li>Guest posting opportunities</li>
+                        <li>Influencer outreach</li>
+                        <li>Social media signals</li>
+                        <li>Local directory listings</li>
+                        <li>Brand mention monitoring</li>
+                    </ul>
+                    <button class="seo-learn-btn" onclick="hideDetails('offpage')">Show Less</button>
+                </div>
+                <button class="seo-learn-btn" onclick="showDetails('offpage')">Learn More</button>
+            </div>
+            
+            <div class="seo-card">
+                <div class="seo-card-icon">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>Technical SEO</h3>
+                <p>Improve your website's technical aspects to help search engines crawl and index your site more effectively.</p>
+                <div class="seo-card-hidden" id="technical-details">
+                    <ul>
+                        <li>Website speed optimization</li>
+                        <li>Mobile responsiveness</li>
+                        <li>XML sitemap creation</li>
+                        <li>Robots.txt optimization</li>
+                        <li>Schema markup implementation</li>
+                        <li>Site architecture improvement</li>
+                    </ul>
+                    <button class="seo-learn-btn" onclick="hideDetails('technical')">Show Less</button>
+                </div>
+                <button class="seo-learn-btn" onclick="showDetails('technical')">Learn More</button>
+            </div>
+            
+            <div class="seo-card">
+                <div class="seo-card-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+                <h3>Local SEO</h3>
+                <p>Increase your visibility in local search results to attract more customers from your area.</p>
+                <div class="seo-card-hidden" id="local-details">
+                    <ul>
+                        <li>Google My Business optimization</li>
+                        <li>Local citation building</li>
+                        <li>Local directory submissions</li>
+                        <li>Review management</li>
+                        <li>Area-specific content creation</li>
+                        <li>Local link building</li>
+                    </ul>
+                    <button class="seo-learn-btn" onclick="hideDetails('local')">Show Less</button>
+                </div>
+                <button class="seo-learn-btn" onclick="showDetails('local')">Learn More</button>
+            </div>
+            
+            <div class="seo-card">
+                <div class="seo-card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>SEO Analytics</h3>
+                <p>Track, measure, and analyze your SEO performance to make data-driven decisions.</p>
+                <div class="seo-card-hidden" id="analytics-details">
+                    <ul>
+                        <li>Keyword ranking tracking</li>
+                        <li>Traffic analysis</li>
+                        <li>Conversion tracking</li>
+                        <li>Competitor analysis</li>
+                        <li>ROI measurement</li>
+                        <li>Custom reporting</li>
+                    </ul>
+                    <button class="seo-learn-btn" onclick="hideDetails('analytics')">Show Less</button>
+                </div>
+                <button class="seo-learn-btn" onclick="showDetails('analytics')">Learn More</button>
+            </div>
+            
+            <div class="seo-card">
+                <div class="seo-card-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h3>E-commerce SEO</h3>
+                <p>Optimize your online store to increase product visibility and drive more sales.</p>
+                <div class="seo-card-hidden" id="ecommerce-details">
+                    <ul>
+                        <li>Product page optimization</li>
+                        <li>Category page optimization</li>
+                        <li>Site search optimization</li>
+                        <li>Structured data implementation</li>
+                        <li>Review and rating integration</li>
+                        <li>Pagination optimization</li>
+                    </ul>
+                    <button class="seo-learn-btn" onclick="hideDetails('ecommerce')">Show Less</button>
+                </div>
+                <button class="seo-learn-btn" onclick="showDetails('ecommerce')">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Process Section -->
+    <section class="seo-process">
+        <h2 class="seo-section-title">Our SEO Process</h2>
+        
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="process-step-number">1</div>
+                <h3>Analysis & Research</h3>
+                <p>We begin with a comprehensive analysis of your website, competitors, and industry to identify opportunities.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="process-step-number">2</div>
+                <h3>Strategy Development</h3>
+                <p>Based on our research, we create a customized SEO strategy tailored to your specific goals.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="process-step-number">3</div>
+                <h3>Implementation</h3>
+                <p>Our team executes the strategy, optimizing all aspects of your website and building quality backlinks.</p>
+            </div>
+            
+            <div class="process-step">
+                <div class="process-step-number">4</div>
+                <h3>Reporting & Optimization</h3>
+                <p>We provide detailed reports and continuously optimize our approach based on performance data.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO Results Section -->
+    <section class="seo-results">
+        <h2 class="seo-section-title">Proven SEO Results</h2>
+        
+        <div class="results-container">
+            <div class="result-item">
+                <div class="result-number">95%</div>
+                <div class="result-text">Client Retention Rate</div>
+            </div>
+            
+            <div class="result-item">
+                <div class="result-number">300%</div>
+                <div class="result-text">Average Traffic Increase</div>
+            </div>
+            
+            <div class="result-item">
+                <div class="result-number">150%</div>
+                <div class="result-text">Average Conversion Increase</div>
+            </div>
+            
+            <div class="result-item">
+                <div class="result-number">24/7</div>
+                <div class="result-text">Support & Monitoring</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="seo-cta">
+        <h2>Ready to Dominate Search Rankings?</h2>
+        <p>Contact us today for a free SEO audit and consultation. Let's develop a strategy to grow your online presence.</p>
+        <a href = "contact.html"><button class="jbh-contact-btn">Get Your Free SEO Audit</button></a>
+    </section>
+
+    <!-- Footer - Same as main page -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>JBH Tech Innovation</h3>
+                <p>Transforming businesses through innovative technology solutions and digital expertise.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/jbhtechinnovation"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/DigitalJbhk"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/jbh-tech-innovation/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/jbh_webstics/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="web app .html">Web Development</a></li>
+                    <li><a href="Custom website.html">Custom Web Development</a></li>
+                    <li><a href="ads.html">Digital Marketing</a></li>
+                    <li><a href="seo.html">SEO Optimization</a></li>
+                    <li><a href="ui.html">UI/UX Design</a></li>
+                   
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="Custom website.html">Services</a></li>
+                    <li><a href="project Grid.html">Project Grid</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Sec 29 Faridabad, Haryana</li>
+                    <li><i class="fas fa-phone"></i> 9990145858</li>
+                    <li><i class="fas fa-envelope"></i> jbh.webstics@gmail.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Sat: 9AM - 6PM</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 JBH Tech Innovation. All Rights Reserved.</p>
+                        <p style="margin-top:10px;font-style:italic;font-size:10px;color:#a09f9f;">
+                Powered by The
+                <a href="https://www.google.com/search?q=zeesu+royalist" style="text-decoration:none;color:#979696;">
+                    Zeesu Royalist Company
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+      // Simplified and corrected hamburger functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.jbh-hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const searchBtn = document.querySelector('.nav-actions .jbh-search-btn');
+    const mobileSearchBtn = document.querySelector('.jbh-mobile-nav-actions .jbh-search-btn');
+    const closeSearch = document.querySelector('.jbh-close-search');
+    const searchModal = document.querySelector('.jbh-search-modal');
+    const servicesDropdown = document.querySelector('.services-dropdown');
+    
+    // Hamburger menu toggle
+    hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        
+        // Close dropdown when closing menu
+        if (!navLinks.classList.contains('active')) {
+            servicesDropdown.classList.remove('active');
+        }
+    });
+    
+    // Mobile dropdown functionality
+    if (window.innerWidth <= 900) {
+        const servicesLink = servicesDropdown.querySelector('a');
+        
+        servicesLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            servicesDropdown.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!servicesDropdown.contains(e.target)) {
+                servicesDropdown.classList.remove('active');
+            }
+        });
+    }
+    
+    // Close mobile menu when clicking on regular links
+    const regularLinks = document.querySelectorAll('.nav-links a:not(.services-dropdown a)');
+    regularLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 900) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                servicesDropdown.classList.remove('active');
+            }
+        });
+    });
+    
+    // Contact button functionality
+    const contactButtons = document.querySelectorAll('.jbh-contact-btn');
+    contactButtons.forEach(button => {
+        if (!button.textContent.includes('SEO Audit')) {
+            button.addEventListener('click', function() {
+                window.location.href = 'contact.html';
+            });
+        }
+    });
+    
+    // Search functionality
+    function openSearch() {
+        searchModal.style.display = 'flex';
+        setTimeout(() => {
+            document.querySelector('.jbh-search-input').focus();
+        }, 100);
+    }
+    
+    function closeSearchModal() {
+        searchModal.style.display = 'none';
+    }
+    
+    if (searchBtn) searchBtn.addEventListener('click', openSearch);
+    if (mobileSearchBtn) mobileSearchBtn.addEventListener('click', openSearch);
+    if (closeSearch) closeSearch.addEventListener('click', closeSearchModal);
+    
+    // Close search modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === searchModal) {
+            closeSearchModal();
+        }
+    });
+    
+    // Close mobile menu on resize to desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 900) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            servicesDropdown.classList.remove('active');
+        }
+    });
+    
+    // SEO card functionality
+    window.showDetails = function(type) {
+        const details = document.getElementById(`${type}-details`);
+        const button = event.target;
+        
+        if (details && button) {
+            details.style.display = 'block';
+            button.style.display = 'none';
+        }
+    };
+    
+    window.hideDetails = function(type) {
+        const details = document.getElementById(`${type}-details`);
+        const button = details.previousElementSibling;
+        
+        if (details && button) {
+            details.style.display = 'none';
+            button.style.display = 'block';
+        }
+    };
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects - JBH Tech Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo-accent {
+            color: #4a6cf7;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4a6cf7;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4a6cf7;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .services-dropdown {
+            position: relative;
+        }
+
+        .services-dropdown>a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .services-dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            min-width: 800px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .services-dropdown:hover .services-dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 10px;
+        }
+
+        .dropdown-column {
+            padding: 10px;
+        }
+
+        .dropdown-heading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #4a6cf7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-list {
+            list-style: none;
+        }
+
+        .dropdown-list li {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+            padding: 8px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .dropdown-list a:hover {
+            background: rgba(74, 108, 247, 0.1);
+            color: #4a6cf7;
+            padding-left: 15px;
+        }
+
+        .dropdown-list a::after {
+            display: none;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .jbh-search-btn {
+            background: transparent;
+            border: 1px solid #4a6cf7;
+            color: #4a6cf7;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .jbh-search-btn:hover {
+            background: #4a6cf7;
+            color: #fff;
+        }
+
+        .jbh-contact-btn {
+            background: #4a6cf7;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .jbh-contact-btn:hover {
+            background: #3a5cd8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.4);
+        }
+
+        .jbh-hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .jbh-hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .jbh-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .jbh-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .jbh-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .jbh-mobile-nav-actions {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .jbh-mobile-nav-actions button {
+            width: 100%;
+        }
+
+        .jbh-search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .jbh-search-container {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .jbh-search-input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4a6cf7;
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
+        }
+
+        .jbh-search-input::placeholder {
+            color: #888;
+        }
+
+        .jbh-close-search {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .jbh-close-search:hover {
+            color: #4a6cf7;
+            transform: rotate(90deg);
+        }
+
+        /* NEW: Carousel Styles */
+        .carousel-container {
+            margin-top: 70px; /* Account for fixed navbar */
+            position: relative;
+            height: 70vh;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.8s ease;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .carousel-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .carousel-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.3s;
+        }
+
+        .carousel-btn {
+            display: inline-block;
+            background: #4a6cf7;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.6s;
+        }
+
+        .carousel-btn:hover {
+            background: #3a5cd8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.3);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: #4a6cf7;
+            transform: scale(1.2);
+        }
+
+        /* Navigation Arrows Hide */
+        .carousel-arrow {
+            display: none;
+        }
+
+        /* Carousel container styling */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+        }
+
+        /* Rest of your existing styles remain the same */
+        /* Project Grid Specific Styles */
+        .projects-container {
+            padding: 100px 5% 60px;
+            min-height: 100vh;
+        }
+        
+        .projects-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .projects-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4a6cf7, #8a5cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .projects-subtitle {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #ccc;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            background: transparent;
+            color: #f5f5f5;
+            border: 1px solid #4a6cf7;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #4a6cf7;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .project-card {
+            background: linear-gradient(145deg, #151515, #1a1a1a);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .project-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(74, 108, 247, 0.2);
+        }
+        
+        .project-image {
+            height: 220px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .project-image img.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(74, 108, 247, 0.85);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .project-card.animate .project-category {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.3s;
+        }
+        
+        .project-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: white;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .project-card.animate .project-title {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.4s;
+        }
+        
+        .project-description {
+            color: #ccc;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .project-card.animate .project-description {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.5s;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .project-card.animate .project-tech {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.6s;
+        }
+        
+        .tech-tag {
+            background: rgba(74, 108, 247, 0.15);
+            color: #8da2ff;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        .project-card.animate .tech-tag {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .project-card.animate .tech-tag:nth-child(1) {
+            transition-delay: 0.7s;
+        }
+        
+        .project-card.animate .tech-tag:nth-child(2) {
+            transition-delay: 0.8s;
+        }
+        
+        .project-card.animate .tech-tag:nth-child(3) {
+            transition-delay: 0.9s;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            color: #4a6cf7;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .project-card.animate .project-link {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 1s;
+        }
+        
+        .project-link:hover {
+            color: #8da2ff;
+            transform: translateX(5px);
+        }
+        
+        .project-link i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-link:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-on-load {
+            animation: fadeInUp 1s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Loading animation for images */
+        .image-placeholder {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, #151515 0%, #1e1e1e 50%, #151515 100%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 900px) {
+            .projects-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            /* Hamburger menu fix */
+            .jbh-hamburger {
+                display: flex !important;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 30px;
+                transition: left 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-actions {
+                display: none;
+            }
+            
+            .jbh-mobile-nav-actions {
+                display: flex;
+            }
+            
+            .services-dropdown-content {
+                position: static;
+                transform: none;
+                min-width: 100%;
+                opacity: 1;
+                visibility: visible;
+                display: none;
+                margin-top: 0;
+                padding: 20px;
+                background: rgba(15, 15, 15, 0.95);
+            }
+            
+            .services-dropdown.active .services-dropdown-content {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        @media screen and (max-width: 600px) {
+            .projects-title {
+                font-size: 2.2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .content-container {
+            padding: 100px 5% 60px;
+            min-height: 100vh;
+        }
+        
+        /* Animated Header */
+        .animated-header {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4a6cf7, #8a5cff, #4a6cf7);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            animation: gradientShift 8s ease infinite;
+            position: relative;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+            100% { background-position: 0% center; }
+        }
+        
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #4a6cf7, #8a5cff);
+            border-radius: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 30px auto;
+            color: #ccc;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+            animation-delay: 0.5s;
+        }
+        
+        /* Feature Showcase */
+        .features-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #151515, #1a1a1a);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #4a6cf7, #8a5cff);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(74, 108, 247, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4a6cf7, #8a5cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .feature-description {
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        /* Tech Innovation Section */
+        .innovation-section {
+            background: linear-gradient(to right, #0c0c0c, #151515);
+            padding: 60px 5%;
+            border-radius: 15px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .innovation-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            opacity: 0.05;
+            background: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80') center/cover no-repeat;
+        }
+        
+        .innovation-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #4a6cf7, #8a5cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+        
+        .innovation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .innovation-text {
+            padding-right: 20px;
+        }
+        
+        .innovation-points {
+            list-style: none;
+        }
+        
+        .innovation-points li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+        
+        .innovation-points li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #4a6cf7;
+            font-size: 1.2rem;
+        }
+        
+        /* Stats Section */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: linear-gradient(145deg, #151515, #1a1a1a);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #4a6cf7, #8a5cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 60px 5%;
+            background: linear-gradient(45deg, rgba(74, 108, 247, 0.1), rgba(138, 92, 255, 0.1));
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #4a6cf7, #8a5cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #4a6cf7;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: #3a5cd8;
+            transition: width 0.5s ease;
+            z-index: -1;
+        }
+        
+        .cta-button:hover::before {
+            width: 100%;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            padding: 40px;
+            text-align: center;
+            color: #b0b0b0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: left;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px;
+        }
+        
+        .footer-column h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #4a6cf7;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            color: #ffffff;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: #4a6cf7;
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .carousel-container {
+                height: 60vh;
+            }
+            
+            .slide-content {
+                margin: 0 5%;
+                padding: 20px;
+            }
+            
+            .slide-content h2 {
+                font-size: 1.8rem;
+            }
+            
+            .content-section, .container, .k-section {
+                padding: 40px 20px;
+            }
+            
+            .section-title, .k-heading {
+                font-size: 2rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            .services {
+                grid-template-columns: 1fr;
+            }
+            
+            .enquiry-container {
+                flex-direction: column;
+            }
+            
+            .enquiry-content, .enquiry-form {
+                padding: 20px;
+            }
+            
+            .k-title {
+                font-size: 2rem;
+            }
+            
+            .k-floating-box {
+                position: relative;
+                margin: 20px 0;
+                animation: none;
+            }
+            
+            .k-box-1, .k-box-2, .k-box-3 {
+                position: relative;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                margin: 20px 0;
+            }
+            
+            .k-about-image {
+                order: 2;
+            }
+            
+            .k-about-content {
+                order: 1;
+            }
+        }
+        
+        /* Animation Keyframes */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Responsive Design */
+        @media screen and (max-width: 900px) {
+            .innovation-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-title {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media screen and (max-width: 600px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .features-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="image/logo (2).png" alt="JBH Tech Logo" class="logo-img">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#">About Us</a></li>
+            <li class="services-dropdown">
+                <a href="#">Services <i class="fa fa-caret-down"></i></a>
+                <div class="services-dropdown-content">
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-laptop-code"></i> Website Development
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-code"></i> Custom Website Development</a></li>
+                            <li><a href="#"><i class="fas fa-shopping-cart"></i> E-commerce Solutions</a></li>
+                            <li><a href="#"><i class="fas fa-cogs"></i> Web Application Development</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-paint-brush"></i> Design
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-palette"></i> Graphics Design</a></li>
+                            <li><a href="#"><i class="fas fa-layer-group"></i> UI/UX Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-chart-line"></i> Marketing
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-search"></i> SEO Services</a></li>
+                            <li><a href="#"><i class="fab fa-facebook"></i> Social Media Marketing</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#portfolio">Project Grid</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+
+            <div class="jbh-mobile-nav-actions">
+                <button class="jbh-search-btn"><i class="fas fa-search"></i> Search</button>
+                <button class="jbh-contact-btn">Contact Us</button>
+            </div>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="jbh-search-btn"><i class="fas fa-search"></i></button>
+            <button class="jbh-contact-btn">Contact Us</button>
+        </div>
+
+        <div class="jbh-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- NEW: Carousel Section -->
+    <div class="carousel-container">
+        <div class="carousel-slides">
+            <!-- Slide 1 -->
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Web Development Projects" class="carousel-image">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">Innovative Web Solutions</h2>
+                    <p class="carousel-subtitle">Discover our portfolio of cutting-edge websites and applications built with the latest technologies</p>
+                    <a href="#projects" class="carousel-btn">View Projects</a>
+                </div>
+            </div>
+            
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Digital Marketing Projects" class="carousel-image">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">Digital Marketing Excellence</h2>
+                    <p class="carousel-subtitle">Explore our successful campaigns that have driven growth for businesses across industries</p>
+                    <a href="#projects" class="carousel-btn">View Projects</a>
+                </div>
+            </div>
+            
+            <!-- Slide 3 -->
+            <div class="carousel-slide">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="UI/UX Design Projects" class="carousel-image">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">Creative Design Solutions</h2>
+                    <p class="carousel-subtitle">Experience our award-winning designs that combine aesthetics with functionality</p>
+                    <a href="#projects" class="carousel-btn">View Projects</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Arrows -->
+        <button class="carousel-arrow prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-arrow next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        
+        <!-- Navigation Dots -->
+        <div class="carousel-nav">
+            <div class="carousel-dot active"></div>
+            <div class="carousel-dot"></div>
+            <div class="carousel-dot"></div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div class="jbh-search-modal">
+        <div class="jbh-search-container">
+            <input type="text" class="jbh-search-input" placeholder="Search...">
+            <button class="jbh-close-search"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Project Grid Content -->
+    <div class="projects-container" id="projects">
+        <div class="projects-header">
+            <h1 class="projects-title animate-on-load">Our Project Portfolio</h1>
+            <p class="projects-subtitle animate-on-load delay-1">Explore our innovative solutions and creative projects that showcase our expertise in web development, design, and digital marketing.</p>
+        </div>
+        
+        <div class="filter-buttons animate-on-load delay-2">
+            <button class="filter-btn active" data-filter="all">All Projects</button>
+            <button class="filter-btn" data-filter="web">Web Development</button>
+            <button class="filter-btn" data-filter="design">Design</button>
+            <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+            <button class="filter-btn" data-filter="marketing">Marketing</button>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <div class="image-placeholder"></div>
+                    <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="E-commerce Website" loading="lazy">
+                    <span class="project-category">Web Development</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Modern E-commerce Platform</h3>
+                    <p class="project-description">A fully responsive e-commerce website with seamless checkout process, product filtering, and admin dashboard.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                    </div>
+                    <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card" data-category="design">
+                <div class="project-image">
+                    <div class="image-placeholder"></div>
+                    <img src="image/finance.webp" alt="UI/UX Design" loading="lazy">
+                    <span class="project-category">UI/UX Design</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Finance Dashboard UI</h3>
+                    <p class="project-description">A sleek and intuitive dashboard interface for financial analytics with data visualization components.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Figma</span>
+                        <span class="tech-tag">Adobe XD</span>
+                        <span class="tech-tag">Illustrator</span>
+                    </div>
+                    <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card" data-category="ecommerce">
+                <div class="project-image">
+                    <div class="image-placeholder"></div>
+                    <img src="image/fashion.webp" alt="E-commerce Store" loading="lazy">
+                    <span class="project-category">E-commerce</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Fashion Retail Store</h3>
+                    <p class="project-description">Complete online fashion store with size guide, wishlist, and integration with multiple payment gateways.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Shopify</span>
+                        <span class="tech-tag">Liquid</span>
+                        <span class="tech-tag">JavaScript</span>
+                    </div>
+                    <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div class="project-card" data-category="web">
+                <div class="project-image">
+                    <div class="image-placeholder"></div>
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Real Estate Website" loading="lazy">
+                    <span class="project-category">Web Development</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Real Estate Portal</h3>
+                    <p class="project-description">Property listing platform with advanced search filters, virtual tours, and agent management system.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Php Laravel</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                    <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div class="project-card" data-category="marketing">
+                <div class="project-image">
+                    <div class="image-placeholder"></div>
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="SEO Campaign" loading="lazy">
+                    <span class="project-category">Marketing</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">SEO Strategy & Implementation</h3>
+                    <p class="project-description">Comprehensive SEO campaign that increased organic traffic by 215% in 6 months for a B2B client.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">SEO</span>
+                        <span class="tech-tag">Analytics</span>
+                        <span class="tech-tag">Digital Marketing</span>
+                    </div>
+                    <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <!-- Project 6 -->
+            <div class="project-card" data-category="design">
+                <div class="project-image">
+                    <div class="image-placeholder"></div>
+                    <img src="image/brand.png" alt="Brand Identity" loading="lazy">
+                    <span class="project-category">Design</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Brand Identity Design</h3>
+                    <p class="project-description">Complete brand identity package including logo, style guide, and marketing materials for a tech startup.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Logo</span>
+                        <span class="tech-tag">Adobe Photoshop</span>
+                        <span class="tech-tag">Banner</span>
+                    </div>
+                    <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="content-container">
+        <!-- Animated Header -->
+        <div class="animated-header">
+            <h1 class="main-title">Transforming Ideas Into Digital Reality</h1>
+            <p class="subtitle">At JBH Tech Innovation, we blend cutting-edge technology with creative vision to deliver solutions that drive your business forward</p>
+        </div>
+        
+        <!-- Features Showcase -->
+        <div class="features-showcase">
+            <div class="feature-card" style="animation: fadeInUp 1s ease forwards; animation-delay: 0.7s;">
+                <div class="feature-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3 class="feature-title">Frontend Development</h3>
+                <p class="feature-description">Tailor-made software solutions designed to address your unique business challenges and requirements.</p>
+            </div>
+            
+            <div class="feature-card" style="animation: fadeInUp 1s ease forwards; animation-delay: 0.9s;">
+                <div class="feature-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3 class="feature-title">Creative Design</h3>
+                <p class="feature-description">Visually stunning interfaces that enhance user experience and reflect your brand identity.</p>
+            </div>
+            
+            <div class="feature-card" style="animation: fadeInUp 1s ease forwards; animation-delay: 1.1s;">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 class="feature-title">Digital Marketing</h3>
+                <p class="feature-description">Data-driven strategies to increase your online visibility and engage your target audience.</p>
+            </div>
+        </div>
+        
+        <!-- Tech Innovation Section -->
+        <div class="innovation-section">
+            <div class="innovation-bg"></div>
+            <h2 class="innovation-title">Our Approach to Innovation</h2>
+            <div class="innovation-content">
+                <div class="innovation-text">
+                    <p>We believe technology should empower businesses, not complicate them. Our process combines strategic thinking with technical excellence to create solutions that are both powerful and intuitive.</p>
+                    <p>By staying at the forefront of emerging technologies and design trends, we ensure that your digital presence remains relevant and effective in an ever-evolving landscape.</p>
+                </div>
+                <ul class="innovation-points">
+                    <li style="animation: fadeInLeft 1s ease forwards; animation-delay: 1.3s;">Collaborative approach that puts your vision at the center</li>
+                    <li style="animation: fadeInLeft 1s ease forwards; animation-delay: 1.5s;">Agile methodology for adaptive and efficient development</li>
+                    <li style="animation: fadeInLeft 1s ease forwards; animation-delay: 1.7s;">Continuous testing and optimization for peak performance</li>
+                    <li style="animation: fadeInLeft 1s ease forwards; animation-delay: 1.9s;">Future-proof solutions that scale with your business</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stat-item" style="animation: fadeInUp 1s ease forwards; animation-delay: 2.1s;">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">Projects Delivered</div>
+            </div>
+            <div class="stat-item" style="animation: fadeInUp 1s ease forwards; animation-delay: 2.3s;">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Client Satisfaction</div>
+            </div>
+            <div class="stat-item" style="animation: fadeInUp 1s ease forwards; animation-delay: 2.5s;">
+                <div class="stat-number">5+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item" style="animation: fadeInUp 1s ease forwards; animation-delay: 2.7s;">
+                <div class="stat-number">20+</div>
+                <div class="stat-label">Experts Team</div>
+            </div>
+        </div>
+        
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to Transform Your Digital Presence?</h2>
+            <p>Let's collaborate to create something extraordinary that drives your business forward</p>
+           <a href = "contact.html"><button class="cta-button">Start Your Project <i class="fas fa-arrow-right"></i></button></a> 
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>JBH Tech Innovation</h3>
+                <p>Transforming businesses through innovative technology solutions and digital expertise.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/jbhtechinnovation"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/DigitalJbhk"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/jbh-tech-innovation/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/jbh_webstics/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="web app .html">Web Development</a></li>
+                    <li><a href="Custom website.html">Custom Website Development</a></li>
+                    <li><a href="ads.html">Digital Marketing</a></li>
+                    <li><a href="seo.html">SEO Optimization</a></li>
+                    <li><a href="ui.html">UI/UX Design</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="Custom website.html">Services</a></li>
+                    <li><a href="project Grid.html">Project Grid</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Sec 29 Faridabad, Haryana</li>
+                    <li><i class="fas fa-phone"></i>  9990145858</li>
+                    <li><i class="fas fa-envelope"></i> jbh.webstics@gmail.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Fri: 9AM - 5PM</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 JBH Tech Innovation. All Rights Reserved.</p>
+                        <p style="margin-top:10px;font-style:italic;font-size:10px;color:#a09f9f;">
+                Powered by The
+                <a href="https://www.google.com/search?q=zeesu+royalist" style="text-decoration:none;color:#979696;">
+                    Zeesu Royalist Company
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.jbh-hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const searchBtn = document.querySelector('.nav-actions .jbh-search-btn');
+            const mobileSearchBtn = document.querySelector('.jbh-mobile-nav-actions .jbh-search-btn');
+            const closeSearch = document.querySelector('.jbh-close-search');
+            const searchModal = document.querySelector('.jbh-search-modal');
+            
+            // Toggle mobile menu
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                });
+            });
+            
+            // Search functionality
+            function openSearch() {
+                searchModal.style.display = 'flex';
+                document.querySelector('.jbh-search-input').focus();
+            }
+            
+            function closeSearchModal() {
+                searchModal.style.display = 'none';
+            }
+            
+            if (searchBtn) {
+                searchBtn.addEventListener('click', openSearch);
+            }
+            
+            if (mobileSearchBtn) {
+                mobileSearchBtn.addEventListener('click', openSearch);
+            }
+            
+            if (closeSearch) {
+                closeSearch.addEventListener('click', closeSearchModal);
+            }
+            
+            // Close search when clicking outside
+            searchModal.addEventListener('click', function(e) {
+                if (e.target === searchModal) {
+                    closeSearchModal();
+                }
+            });
+            
+            // Close search with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchModal.style.display === 'flex') {
+                    closeSearchModal();
+                }
+            });
+            // Contact button functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const contactButtons = document.querySelectorAll('.jbh-contact-btn');
+    
+    contactButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            window.location.href = 'contact.html';
+            // Ya fir specific page pe redirect karen
+            // window.location.href = '/contact';
+            // window.location.href = 'https://example.com/contact';
+        });
+    });
+});
+            
+
+            // NEW: Carousel functionality
+            const carouselSlides = document.querySelector('.carousel-slides');
+            const carouselDots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.querySelector('.carousel-arrow.prev');
+            const nextBtn = document.querySelector('.carousel-arrow.next');
+            let currentSlide = 0;
+            const totalSlides = document.querySelectorAll('.carousel-slide').length;
+            let slideInterval;
+
+            // Function to go to a specific slide
+            function goToSlide(slideIndex) {
+                if (slideIndex < 0) slideIndex = totalSlides - 1;
+                if (slideIndex >= totalSlides) slideIndex = 0;
+                
+                currentSlide = slideIndex;
+                carouselSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update active dot
+                carouselDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            // Next slide function
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+
+            // Previous slide function
+            function prevSlide() {
+                goToSlide(currentSlide - 1);
+            }
+
+            // Auto slide function
+            function startAutoSlide() {
+                slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+            }
+
+            // Stop auto slide on user interaction
+            function stopAutoSlide() {
+                clearInterval(slideInterval);
+            }
+
+            // Event listeners for carousel controls
+            prevBtn.addEventListener('click', () => {
+                stopAutoSlide();
+                prevSlide();
+                startAutoSlide();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                stopAutoSlide();
+                nextSlide();
+                startAutoSlide();
+            });
+
+            // Dot navigation
+            carouselDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    stopAutoSlide();
+                    goToSlide(index);
+                    startAutoSlide();
+                });
+            });
+
+            // Start auto sliding
+            startAutoSlide();
+
+            // Pause auto slide on hover
+            const carouselContainer = document.querySelector('.carousel-container');
+            carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+            carouselContainer.addEventListener('mouseleave', startAutoSlide);
+        });
+        
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) * 1.2 &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        // Function to handle scroll animation
+        function handleScrollAnimation() {
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            projectCards.forEach(card => {
+                if (isInViewport(card) && !card.classList.contains('animate')) {
+                    card.classList.add('animate');
+                    
+                    // Load image with a slight delay for better effect
+                    const img = card.querySelector('img');
+                    if (img) {
+                        setTimeout(() => {
+                            img.classList.add('loaded');
+                        }, 300);
+                    }
+                }
+            });
+        }
+        
+        // Filter functionality
+        function setupFiltering() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    projectCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                            card.style.display = 'flex';
+                            // Re-trigger animation after filter
+                            setTimeout(() => {
+                                if (isInViewport(card)) {
+                                    card.classList.add('animate');
+                                    const img = card.querySelector('img');
+                                    if (img) {
+                                        img.classList.add('loaded');
+                                    }
+                                }
+                            }, 50);
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up filtering
+            setupFiltering();
+            
+            // Initial check for elements in viewport
+            handleScrollAnimation();
+            
+            // Listen for scroll events
+            window.addEventListener('scroll', handleScrollAnimation);
+            
+            // Preload images
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                // If image is already loaded, add loaded class
+                if (img.complete) {
+                    img.classList.add('loaded');
+                    if (img.previousElementSibling && img.previousElementSibling.classList.contains('image-placeholder')) {
+                        img.previousElementSibling.style.display = 'none';
+                    }
+                } else {
+                    img.addEventListener('load', function() {
+                        this.classList.add('loaded');
+                        if (this.previousElementSibling && this.previousElementSibling.classList.contains('image-placeholder')) {
+                            this.previousElementSibling.style.display = 'none';
+                        }
+                    });
+                    
+                    // Fallback in case load event doesn't fire
+                    setTimeout(() => {
+                        if (!img.classList.contains('loaded')) {
+                            img.classList.add('loaded');
+                            if (img.previousElementSibling && img.previousElementSibling.classList.contains('image-placeholder')) {
+                                img.previousElementSibling.style.display = 'none';
+                            }
+                        }
+                    }, 2000);
+                }
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animation for stats counting
+            const statItems = document.querySelectorAll('.stat-item');
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+            
+            // Animate stats when they come into view
+            function animateStats() {
+                statItems.forEach(item => {
+                    if (isInViewport(item)) {
+                        const number = item.querySelector('.stat-number');
+                        const finalValue = number.textContent;
+                        
+                        if (!number.classList.contains('animated')) {
+                            number.classList.add('animated');
+                            animateValue(number, 0, finalValue, 2000);
+                        }
+                    }
+                });
+            }
+            
+            // Value animation function
+            function animateValue(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    
+                    if (end.includes('+')) {
+                        element.textContent = Math.floor(progress * parseInt(end)) + "+";
+                    } else if (end.includes('%')) {
+                        element.textContent = Math.floor(progress * parseInt(end)) + "%";
+                    } else {
+                        element.textContent = Math.floor(progress * parseInt(end));
+                    }
+                    
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+            
+            // Initial check and scroll listener
+            animateStats();
+            window.addEventListener('scroll', animateStats);
+            
+            // Button hover effect enhancement
+            const ctaButton = document.querySelector('.cta-button');
+            ctaButton.addEventListener('mouseenter', function() {
+                this.querySelector('i').style.transform = 'translateX(5px)';
+            });
+            
+            ctaButton.addEventListener('mouseleave', function() {
+                this.querySelector('i').style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+</html>

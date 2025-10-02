@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Marketing | JBH Tech Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+
+            height: 70px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo-accent {
+            color: #4a6cf7;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4a6cf7;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4a6cf7;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .services-dropdown {
+            position: relative;
+        }
+
+        .services-dropdown>a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .services-dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            min-width: 800px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .services-dropdown:hover .services-dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 10px;
+        }
+
+        .dropdown-column {
+            padding: 10px;
+        }
+
+        .dropdown-heading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #4a6cf7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-list {
+            list-style: none;
+        }
+
+        .dropdown-list li {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+            padding: 8px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .dropdown-list a:hover {
+            background: rgba(74, 108, 247, 0.1);
+            color: #4a6cf7;
+            padding-left: 15px;
+        }
+
+        .dropdown-list a::after {
+            display: none;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .jbh-search-btn {
+            background: transparent;
+            border: 1px solid #4a6cf7;
+            color: #4a6cf7;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .jbh-search-btn:hover {
+            background: #4a6cf7;
+            color: #fff;
+        }
+
+        .jbh-contact-btn {
+            background: #4a6cf7;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .jbh-contact-btn:hover {
+            background: #3a5cd8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.4);
+        }
+
+        .jbh-hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .jbh-hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .jbh-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .jbh-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .jbh-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .jbh-mobile-nav-actions {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .jbh-mobile-nav-actions button {
+            width: 100%;
+        }
+
+        .jbh-search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .jbh-search-container {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .jbh-search-input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4a6cf7;
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
+        }
+
+        .jbh-search-input::placeholder {
+            color: #888;
+        }
+
+        .jbh-close-search {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .jbh-close-search:hover {
+            color: #4a6cf7;
+            transform: rotate(90deg);
+        }
+
+        /* Social Media Marketing Hero Section */
+        .smm-hero {
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), url('https://images.unsplash.com/photo-1562577309-4932fdd64cd1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 5% 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .smm-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .smm-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #e0e0e0;
+        }
+
+        .smm-hero-accent {
+            color: #4a6cf7;
+            /* Using the blue theme color */
+        }
+
+        /* Social Media Marketing Content Sections */
+        .smm-section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .smm-section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .smm-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #4a6cf7;
+            /* Using the blue theme color */
+            border-radius: 2px;
+        }
+
+        .smm-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .smm-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid #4a6cf7;
+            /* Using the blue theme color */
+        }
+
+        .smm-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .smm-card-icon {
+            font-size: 3rem;
+            color: #4a6cf7;
+            /* Using the blue theme color */
+            margin-bottom: 20px;
+        }
+
+        .smm-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .smm-card p {
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        .smm-card-hidden {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .smm-card-hidden ul {
+            text-align: left;
+            color: #b0b0b0;
+            margin-bottom: 20px;
+        }
+
+        .smm-card-hidden li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .smm-card-hidden li:before {
+            content: '✓';
+            color: #4a6cf7;
+            /* Using the blue theme color */
+            position: absolute;
+            left: 0;
+        }
+
+        .smm-learn-btn {
+            background-color: #4a6cf7;
+            /* Using the blue theme color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .smm-learn-btn:hover {
+            background-color: #3a5cd8;
+            /* Darker blue */
+        }
+
+        /* Platform Cards Section */
+        .platforms-section {
+            background: #1a1a1a;
+            padding: 80px 5%;
+        }
+
+        .platforms-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .platform-card {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            background: #252525;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .platform-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #4a6cf7;
+            /* Using the blue theme color */
+        }
+
+        .platform-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .platform-card p {
+            color: #b0b0b0;
+        }
+
+        /* SMM Process Section */
+        .smm-process {
+            padding: 80px 5%;
+        }
+
+        .smm-process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .smm-process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: center;
+            position: relative;
+        }
+
+        .smm-process-step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4a6cf7, #3a5cd8);
+            /* Blue gradient */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+            color: white;
+        }
+
+        .smm-process-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .smm-process-step p {
+            color: #b0b0b0;
+        }
+
+        .smm-process-step:not(:last-child)::after {
+            content: '→';
+            position: absolute;
+            top: 50%;
+            right: -25px;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #4a6cf7;
+        }
+
+        /* SMM Results Section */
+        .smm-results {
+            background: #1a1a1a;
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .smm-results-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .smm-result-item {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+        }
+
+        .smm-result-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #4a6cf7;
+            /* Using the blue theme color */
+            margin-bottom: 10px;
+        }
+
+        .smm-result-text {
+            font-size: 1.2rem;
+            color: #ffffff;
+        }
+
+        /* CTA Section */
+        .smm-cta {
+            background: linear-gradient(90deg, #4a6cf7, #8a94a6);
+            /* Blue gradient */
+            padding: 80px 5%;
+            text-align: center;
+        }
+
+        .smm-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .smm-cta p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #e0e0e0;
+        }
+
+        /* Footer - Same as main page */
+        footer {
+            background: #1a1a1a;
+            padding: 40px;
+            text-align: center;
+            color: #b0b0b0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: left;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px;
+        }
+
+        .footer-column h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #4a6cf7;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            color: #ffffff;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #4a6cf7;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        /* Responsive Navigation */
+@media (max-width: 992px) {
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        background: rgba(10, 10, 10, 0.98);
+        width: 100%;
+        height: 100vh;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 20px;
+        padding: 40px 20px;
+        transition: left 0.3s ease;
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-actions {
+        display: none; /* hide desktop buttons */
+    }
+
+    .jbh-hamburger {
+        display: flex; /* show hamburger */
+    }
+
+    .jbh-mobile-nav-actions {
+        display: flex; /* show buttons inside mobile nav */
+    }
+
+    .services-dropdown-content {
+        position: static;
+        transform: none;
+        min-width: auto;
+        grid-template-columns: 1fr;
+        padding: 20px;
+        box-shadow: none;
+        margin-top: 0;
+    }
+
+    .services-dropdown:hover .services-dropdown-content {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .smm-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .smm-section-title {
+                font-size: 2rem;
+            }
+
+            .smm-process-step {
+                min-width: 100%;
+            }
+
+            .platform-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar - Same as main page -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="image/logo (2).png" alt="JBH Tech Logo" class="logo-img">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#">About Us</a></li>
+            <li class="services-dropdown">
+                <a href="#">Services <i class="fa fa-caret-down"></i></a>
+                            
+                <div class="services-dropdown-content">
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-laptop-code"></i> Website Development
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-code"></i> Custom Website Development</a></li>
+                            <li><a href="#"><i class="fas fa-shopping-cart"></i> E-commerce Solutions</a></li>
+                            <li><a href="#"><i class="fas fa-cogs"></i> Web Application Development</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-paint-brush"></i> Design
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-palette"></i> Graphics Design</a></li>
+                            <li><a href="#"><i class="fas fa-layer-group"></i> UI/UX Design</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-chart-line"></i> Marketing
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-search"></i> SEO Services</a></li>
+                            <li><a href="#"><i class="fab fa-facebook"></i> Social Media Marketing</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#portfolio">Project Grid</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+
+            <div class="jbh-mobile-nav-actions">
+                <button class="jbh-search-btn"><i class="fas fa-search"></i> Search</button>
+                <button class="jbh-contact-btn">Contact Us</button>
+            </div>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="jbh-search-btn"><i class="fas fa-search"></i></button>
+            <button class="jbh-contact-btn">Contact Us</button>
+        </div>
+
+        <div class="jbh-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Search Modal - Same as main page -->
+    <div class="jbh-search-modal">
+        <div class="jbh-search-container">
+            <input type="text" class="jbh-search-input" placeholder="Search...">
+            <button class="jbh-close-search"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Social Media Marketing Hero Section -->
+    <section class="smm-hero">
+        <h1>Professional <span class="smm-hero-accent">Social Media Marketing</span></h1>
+        <p>Amplify your brand's presence, engage with your audience, and drive conversions with our comprehensive social
+            media marketing strategies.</p>
+        <button class="jbh-contact-btn">Get Free Social Media Audit</button>
+    </section>
+
+    <!-- Social Media Marketing Services Section -->
+    <section class="smm-section">
+        <h2 class="smm-section-title">Our Social Media Marketing Services</h2>
+
+        <div class="smm-grid">
+            <div class="smm-card">
+                <div class="smm-card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Strategy Development</h3>
+                <p>Custom social media strategies tailored to your business goals and target audience.</p>
+                <div class="smm-card-hidden" id="strategy-details">
+                    <ul>
+                        <li>Audience research and analysis</li>
+                        <li>Competitive analysis</li>
+                        <li>Content strategy planning</li>
+                        <li>Platform selection</li>
+                        <li>Goal setting and KPI definition</li>
+                        <li>Campaign planning</li>
+                    </ul>
+                    <button class="smm-learn-btn" onclick="hideSMMDetails('strategy')">Show Less</button>
+                </div>
+                <button class="smm-learn-btn" onclick="showSMMDetails('strategy')">Learn More</button>
+            </div>
+
+            <div class="smm-card">
+                <div class="smm-card-icon">
+                    <i class="fas fa-pencil-alt"></i>
+                </div>
+                <h3>Content Creation</h3>
+                <p>Engaging and shareable content designed to capture attention and drive engagement.</p>
+                <div class="smm-card-hidden" id="content-details">
+                    <ul>
+                        <li>Visual content creation (images, videos)</li>
+                        <li>Copywriting for social media</li>
+                        <li>Content calendar development</li>
+                        <li>Brand voice consistency</li>
+                        <li>Trend incorporation</li>
+                        <li>User-generated content campaigns</li>
+                    </ul>
+                    <button class="smm-learn-btn" onclick="hideSMMDetails('content')">Show Less</button>
+                </div>
+                <button class="smm-learn-btn" onclick="showSMMDetails('content')">Learn More</button>
+            </div>
+
+            <div class="smm-card">
+                <div class="smm-card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Community Management</h3>
+                <p>Build and nurture an active community around your brand across social platforms.</p>
+                <div class="smm-card-hidden" id="community-details">
+                    <ul>
+                        <li>Audience engagement</li>
+                        <li>Comment moderation</li>
+                        <li>Response management</li>
+                        <li>Community growth strategies</li>
+                        <li>Brand advocacy programs</li>
+                        <li>Crisis management</li>
+                    </ul>
+                    <button class="smm-learn-btn" onclick="hideSMMDetails('community')">Show Less</button>
+                </div>
+                <button class="smm-learn-btn" onclick="showSMMDetails('community')">Learn More</button>
+            </div>
+
+            <div class="smm-card">
+                <div class="smm-card-icon">
+                    <i class="fas fa-ad"></i>
+                </div>
+                <h3>Social Media Advertising</h3>
+                <p>Targeted paid campaigns to reach your ideal audience and achieve specific business objectives.</p>
+                <div class="smm-card-hidden" id="advertising-details">
+                    <ul>
+                        <li>Campaign strategy development</li>
+                        <li>Audience targeting</li>
+                        <li>Ad creative development</li>
+                        <li>A/B testing</li>
+                        <li>Budget optimization</li>
+                        <li>Performance tracking</li>
+                    </ul>
+                    <button class="smm-learn-btn" onclick="hideSMMDetails('advertising')">Show Less</button>
+                </div>
+                <button class="smm-learn-btn" onclick="showSMMDetails('advertising')">Learn More</button>
+            </div>
+
+            <div class="smm-card">
+                <div class="smm-card-icon">
+                    <i class="fas fa-analytics"></i>
+                </div>
+                <h3>Analytics & Reporting</h3>
+                <p>Comprehensive tracking and reporting to measure performance and optimize strategies.</p>
+                <div class="smm-card-hidden" id="analytics-details">
+                    <ul>
+                        <li>Performance metrics tracking</li>
+                        <li>ROI measurement</li>
+                        <li>Competitive analysis</li>
+                        <li>Custom reporting</li>
+                        <li>Insights and recommendations</li>
+                        <li>Campaign optimization</li>
+                    </ul>
+                    <button class="smm-learn-btn" onclick="hideSMMDetails('analytics')">Show Less</button>
+                </div>
+                <button class="smm-learn-btn" onclick="showSMMDetails('analytics')">Learn More</button>
+            </div>
+
+            <div class="smm-card">
+                <div class="smm-card-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3>Influencer Marketing</h3>
+                <p>Leverage the power of influencers to expand your reach and build brand credibility.</p>
+                <div class="smm-card-hidden" id="influencer-details">
+                    <ul>
+                        <li>Influencer identification</li>
+                        <li>Outreach and negotiation</li>
+                        <li>Campaign management</li>
+                        <li>Content collaboration</li>
+                        <li>Performance tracking</li>
+                        <li>Relationship management</li>
+                    </ul>
+                    <button class="smm-learn-btn" onclick="hideSMMDetails('influencer')">Show Less</button>
+                </div>
+                <button class="smm-learn-btn" onclick="showSMMDetails('influencer')">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Platforms Section -->
+    <section class="platforms-section">
+        <h2 class="smm-section-title">Platforms We Specialize In</h2>
+
+        <div class="platforms-container">
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <h3>Facebook Marketing</h3>
+                <p>Comprehensive Facebook strategies including organic content, community management, and targeted
+                    advertising.</p>
+            </div>
+
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3>Instagram Marketing</h3>
+                <p>Visual storytelling, influencer collaborations, and shoppable posts to engage your audience.</p>
+            </div>
+
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <h3>Twitter Marketing</h3>
+                <p>Real-time engagement, trend participation, and conversation management to build brand presence.</p>
+            </div>
+
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fab fa-linkedin-in"></i>
+                </div>
+                <h3>LinkedIn Marketing</h3>
+                <p>B2B focused strategies, thought leadership content, and professional networking.</p>
+            </div>
+
+            <div class="platform-card">
+                <div class="platform-icon">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <h3>YouTube Marketing</h3>
+                <p>Video content strategy, channel optimization, and advertising to engage viewers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SMM Process Section -->
+    <section class="smm-process">
+        <h2 class="smm-section-title">Our Social Media Marketing Process</h2>
+
+        <div class="smm-process-steps">
+            <div class="smm-process-step">
+                <div class="smm-process-step-number">1</div>
+                <h3>Discovery & Analysis</h3>
+                <p>We begin with an in-depth analysis of your business, audience, and competitors.</p>
+            </div>
+
+            <div class="smm-process-step">
+                <div class="smm-process-step-number">2</div>
+                <h3>Strategy Development</h3>
+                <p>We create a customized social media strategy aligned with your business goals.</p>
+            </div>
+
+            <div class="smm-process-step">
+                <div class="smm-process-step-number">3</div>
+                <h3>Content Creation</h3>
+                <p>Our team develops engaging content tailored to each platform and audience.</p>
+            </div>
+
+            <div class="smm-process-step">
+                <div class="smm-process-step-number">4</div>
+                <h3>Implementation</h3>
+                <p>We execute the strategy, manage campaigns, and engage with your audience.</p>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- SMM Results Section -->
+    <section class="smm-results">
+        <h2 class="smm-section-title">Proven Social Media Results</h2>
+
+        <div class="smm-results-container">
+            <div class="smm-result-item">
+                <div class="smm-result-number">65%</div>
+                <div class="smm-result-text">Average Engagement Increase</div>
+            </div>
+
+            <div class="smm-result-item">
+                <div class="smm-result-number">3.5x</div>
+                <div class="smm-result-text">Higher Conversion Rates</div>
+            </div>
+
+            <div class="smm-result-item">
+                <div class="smm-result-number">89%</div>
+                <div class="smm-result-text">Client Retention Rate</div>
+            </div>
+
+            <div class="smm-result-item">
+                <div class="smm-result-number">24/7</div>
+                <div class="smm-result-text">Campaign Monitoring</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="smm-cta">
+        <h2>Ready to Transform Your Social Media Presence?</h2>
+        <p>Contact us today for a free social media audit and consultation. Let's develop a strategy to grow your brand.
+        </p>
+        <a href="contact.html"><button class="jbh-contact-btn">Get Your Free Social Media Audit</button></a>
+    </section>
+
+    <!-- Footer - Same as main page -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>JBH Tech Innovation</h3>
+                <p>Transforming businesses through innovative technology solutions and digital expertise.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/jbhtechinnovation"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/DigitalJbhk"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/jbh-tech-innovation/"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/jbh_webstics/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Our Services</h3>
+                <ul>
+                    <li><a href="web app .html">Web Development</a></li>
+                    <li><a href="Custom website.html">Custom Website Development</a></li>
+                    <li><a href="ads.html">Digital Marketing</a></li>
+                    <li><a href="seo.html">SEO Optimization</a></li>
+                    <li><a href="ui.html">UI/UX Design</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="Custom website.html">Services</a></li>
+                    <li><a href="project Grid.html">Project Grid</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Sec 29 Faridabad, Haryana</li>
+                    <li><i class="fas fa-phone"></i>9990145858</li>
+                    <li><i class="fas fa-envelope"></i> jbhwebsitics@gmai.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Sat: 9AM-6PM</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 JBH Tech Innovation. All Rights Reserved.</p>
+                        <p style="margin-top:10px;font-style:italic;font-size:10px;color:#a09f9f;">
+                Powered by The
+                <a href="https://www.google.com/search?q=zeesu+royalist" style="text-decoration:none;color:#979696;">
+                    Zeesu Royalist Company
+                </a>
+            </p>
+        </div>
+    </footer>
+
+
+<script>
+        // JavaScript for mobile menu toggle
+        const hamburger = document.querySelector('.jbh-hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // JavaScript for search modal
+        const searchBtn = document.querySelector('.jbh-search-btn');
+        const closeSearch = document.querySelector('.jbh-close-search');
+        const searchModal = document.querySelector('.jbh-search-modal');
+
+        searchBtn.addEventListener('click', () => {
+            searchModal.style.display = 'flex';
+        });
+
+        closeSearch.addEventListener('click', () => {
+            searchModal.style.display = 'none';
+        });
+
+        // Close search modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === searchModal) {
+                searchModal.style.display = 'none';
+            }
+        });
+
+        // JavaScript for SMM card details toggle
+        function showSMMDetails(type) {
+            document.getElementById(`${type}-details`).style.display = 'block';
+            event.target.style.display = 'none';
+        }
+
+        function hideSMMDetails(type) {
+            document.getElementById(`${type}-details`).style.display = 'none';
+            event.target.parentElement.previousElementSibling.style.display = 'block';
+        }
+
+        // Animation on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = `fadeInUp 1s forwards`;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all sections for animation
+            document.querySelectorAll('.smm-section, .platforms-section, .smm-process, .smm-results, .smm-cta').forEach(section => {
+                section.style.opacity = '0';
+                observer.observe(section);
+            });
+
+            // Observe cards for staggered animation
+            document.querySelectorAll('.smm-card, .platform-card, .smm-process-step, .smm-result-item').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.animationDelay = `${index * 0.2}s`;
+                observer.observe(card);
+            });
+        });
+        
+    </script>
+</body>
+</html>

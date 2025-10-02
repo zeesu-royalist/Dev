@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphics Design Services - JBH Tech Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+
+                        height: 60px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logo-accent {
+            color: #4a6cf7;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4a6cf7;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4a6cf7;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Services Dropdown */
+        .services-dropdown {
+            position: relative;
+        }
+
+        .services-dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .services-dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20, 20, 20, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            min-width: 800px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .services-dropdown:hover .services-dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 10px;
+        }
+
+        .dropdown-column {
+            padding: 10px;
+        }
+
+        .dropdown-heading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #4a6cf7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-list {
+            list-style: none;
+        }
+
+        .dropdown-list li {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-list a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+            padding: 8px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .dropdown-list a:hover {
+            background: rgba(74, 108, 247, 0.1);
+            color: #4a6cf7;
+            padding-left: 15px;
+        }
+
+        .dropdown-list a::after {
+            display: none;
+        }
+
+        /* Nav Actions */
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .jbh-search-btn {
+            background: transparent;
+            border: 1px solid #4a6cf7;
+            color: #4a6cf7;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .jbh-search-btn:hover {
+            background: #4a6cf7;
+            color: #fff;
+        }
+
+        .jbh-contact-btn {
+            background: #4a6cf7;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .jbh-contact-btn:hover {
+            background: #3a5cd8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.4);
+        }
+
+        /* Hamburger Menu */
+        .jbh-hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .jbh-hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .jbh-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .jbh-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .jbh-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Nav Actions */
+        .jbh-mobile-nav-actions {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            padding: 20px 0;
+        }
+
+        .jbh-mobile-nav-actions button {
+            width: 100%;
+        }
+
+        /* Search Modal */
+        .jbh-search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .jbh-search-container {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .jbh-search-input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4a6cf7;
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
+        }
+
+        .jbh-search-input::placeholder {
+            color: #888;
+        }
+
+        .jbh-close-search {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .jbh-close-search:hover {
+            color: #4a6cf7;
+            transform: rotate(90deg);
+        }
+
+        /* Graphics Design Hero Section */
+        .jbh-graphics-hero {
+            background: linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), url('https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 200px 5% 100px;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .jbh-graphics-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #fff;
+            animation: fadeInUp 1s ease;
+        }
+
+        .jbh-graphics-hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: #e0e0e0;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .jbh-hero-btn {
+            display: inline-block;
+            background-color: #4a6cf7;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .jbh-hero-btn:hover {
+            background-color: #3a5cd8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.4);
+        }
+
+        /* Services Section */
+        .jbh-graphics-services {
+            padding: 100px 5%;
+            background-color: #0f0f0f;
+        }
+
+        .jbh-section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .jbh-section-title h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .jbh-section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: #4a6cf7;
+        }
+
+        .jbh-section-title p {
+            color: #ccc;
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+        }
+
+        .jbh-services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .jbh-service-card {
+            background: linear-gradient(145deg, #1a1a1a, #151515);
+            border-radius: 10px;
+            padding: 40px 30px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .jbh-service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, #4a6cf7, #3a5cd8);
+            transition: all 0.5s;
+        }
+
+        .jbh-service-card:hover::before {
+            height: 100%;
+        }
+
+        .jbh-service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(74, 108, 247, 0.3);
+        }
+
+        .jbh-service-icon {
+            font-size: 3rem;
+            color: #4a6cf7;
+            margin-bottom: 20px;
+        }
+
+        .jbh-service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .jbh-service-card p {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .jbh-service-link {
+            color: #4a6cf7;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        .jbh-service-link:hover {
+            color: #3a5cd8;
+            gap: 10px;
+        }
+
+        /* Portfolio Section */
+        .jbh-graphics-portfolio {
+            padding: 100px 5%;
+            background-color: #0a0a0a;
+        }
+
+        .jbh-portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .jbh-portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            height: 300px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .jbh-portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .jbh-portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(74, 108, 247, 0.85), rgba(58, 92, 216, 0.9));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .jbh-portfolio-item:hover .jbh-portfolio-overlay {
+            opacity: 1;
+        }
+
+        .jbh-portfolio-item:hover .jbh-portfolio-img {
+            transform: scale(1.1);
+        }
+
+        .jbh-portfolio-overlay h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .jbh-portfolio-overlay p {
+            color: #f0f0f0;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .jbh-portfolio-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .jbh-portfolio-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            gap: 12px;
+        }
+
+        /* Process Section */
+        .jbh-graphics-process {
+            padding: 100px 5%;
+            background-color: #0f0f0f;
+        }
+
+        .jbh-process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .jbh-process-step {
+            width: 200px;
+            text-align: center;
+            position: relative;
+        }
+
+        .jbh-step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, #4a6cf7, #3a5cd8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.4);
+            transition: all 0.3s;
+        }
+
+        .jbh-process-step:hover .jbh-step-number {
+            transform: scale(1.1) rotate(360deg);
+        }
+
+        .jbh-process-step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .jbh-process-step p {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .jbh-graphics-cta {
+            background: linear-gradient(rgba(10, 10, 10, 0.9), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            padding: 120px 5%;
+            text-align: center;
+        }
+
+        .jbh-cta-content h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .jbh-cta-content p {
+            color: #e0e0e0;
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .jbh-cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .jbh-cta-btn-primary {
+            background-color: #4a6cf7;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .jbh-cta-btn-primary:hover {
+            background-color: #3a5cd8;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.4);
+        }
+
+        .jbh-cta-btn-secondary {
+            background-color: transparent;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 2px solid #4a6cf7;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .jbh-cta-btn-secondary:hover {
+            background-color: #4a6cf7;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(74, 108, 247, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #070707;
+            padding: 70px 5% 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #fff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #4a6cf7;
+        }
+
+        .footer-column p {
+            color: #ccc;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            padding-left: 0;
+        }
+
+        .footer-column a:hover {
+            color: #4a6cf7;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            padding-left: 0 !important;
+        }
+
+        .social-links a:hover {
+            background: #4a6cf7;
+            transform: translateY(-5px);
+        }
+
+        .social-links a i {
+            color: #fff;
+            font-size: 1.1rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #1a1a1a;
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .services-dropdown-content {
+                min-width: 600px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 20px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.4s ease;
+                overflow-y: auto;
+                gap: 0;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 0;
+                width: 50%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+
+            .services-dropdown-content {
+                position: static;
+                width: 90%;
+                min-width: auto;
+                display: none;
+                margin: 10px auto;
+                opacity: 1;
+                visibility: visible;
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .services-dropdown.active .services-dropdown-content {
+                display: grid;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .jbh-hamburger {
+                display: flex;
+            }
+
+            .jbh-mobile-nav-actions {
+                display: flex;
+            }
+
+            .jbh-graphics-hero {
+                padding: 150px 5% 80px;
+            }
+
+            .jbh-graphics-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .jbh-graphics-hero p {
+                font-size: 1rem;
+            }
+
+            .jbh-section-title h2 {
+                font-size: 2rem;
+            }
+
+            .jbh-services-grid,
+            .jbh-portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .jbh-process-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .jbh-cta-content h2 {
+                font-size: 2rem;
+            }
+
+            .jbh-cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .jbh-cta-btn-primary,
+            .jbh-cta-btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .jbh-graphics-hero {
+                padding: 130px 5% 70px;
+            }
+
+            .jbh-graphics-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .jbh-graphics-services,
+            .jbh-graphics-process,
+            .jbh-graphics-portfolio,
+            .jbh-graphics-cta {
+                padding: 60px 5%;
+            }
+
+            .jbh-section-title h2 {
+                font-size: 1.6rem;
+            }
+
+            .jbh-service-card {
+                padding: 30px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="image/logo (2).png" alt="JBH Tech Logo" class="logo-img">
+            </a>
+        </div>
+    
+        <ul class="nav-links">
+            <li><a href="about.html">About Us</a></li>
+            <li class="services-dropdown">
+                <a href="#">Services <i class="fa fa-caret-down"></i></a>
+                <div class="services-dropdown-content">
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-laptop-code"></i> Website Development
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-code"></i> Custom Website Development</a></li>
+                            <li><a href="#"><i class="fas fa-shopping-cart"></i> E-commerce Solutions</a></li>
+                            <li><a href="#"><i class="fas fa-cogs"></i> Web Application Development</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-paint-brush"></i> Design
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-palette"></i> Graphics Design</a></li>
+                            <li><a href="#"><i class="fas fa-layer-group"></i> UI/UX Design</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-chart-line"></i> Marketing
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="#"><i class="fas fa-search"></i> SEO Services</a></li>
+                            <li><a href="#"><i class="fab fa-facebook"></i> Social Media Marketing</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="#portfolio">Project Grid</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+    
+            <div class="jbh-mobile-nav-actions">
+                <button class="jbh-search-btn"><i class="fas fa-search"></i> Search</button>
+                <button class="jbh-contact-btn">Contact Us</button>
+            </div>
+        </ul>
+    
+        <div class="nav-actions">
+            <button class="jbh-search-btn"><i class="fas fa-search"></i></button>
+            <button class="jbh-contact-btn">Contact Us</button>
+        </div>
+    
+        <div class="jbh-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    
+    <!-- Search Modal -->
+    <div class="jbh-search-modal">
+        <div class="jbh-search-container">
+            <input type="text" class="jbh-search-input" placeholder="Search services, projects...">
+            <button class="jbh-close-search"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Graphics Design Hero Section -->
+    <section class="jbh-graphics-hero">
+        <h1>Graphics Design Services</h1>
+        <p>Transform your brand with stunning visual designs that captivate your audience and communicate your message effectively. Our creative team delivers exceptional graphics solutions tailored to your needs.</p>
+        <a href="#contact" class="jbh-hero-btn">Start Your Project</a>
+    </section>
+
+    <!-- Services Section -->
+    <section class="jbh-graphics-services">
+        <div class="jbh-section-title">
+            <h2>Our Graphics Design Services</h2>
+            <p>We offer a comprehensive range of graphic design services to elevate your brand identity</p>
+        </div>
+        
+        <div class="jbh-services-grid">
+            <div class="jbh-service-card">
+                <div class="jbh-service-icon">
+                    <i class="fas fa-pencil-alt"></i>
+                </div>
+                <h3>Logo Design</h3>
+                <p>Create a memorable brand identity with custom logo designs that represent your business values and vision.</p>
+                <a href="#" class="jbh-service-link">View Details <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="jbh-service-card">
+                <div class="jbh-service-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3>Brand Identity</h3>
+                <p>Develop a cohesive brand identity system including color palettes, typography, and visual guidelines.</p>
+                <a href="#" class="jbh-service-link">View Details <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="jbh-service-card">
+                <div class="jbh-service-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3>Print Design</h3>
+                <p>Design professional business cards, brochures, flyers, and other print materials that make an impact.</p>
+                <a href="#" class="jbh-service-link">View Details <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="jbh-service-card">
+                <div class="jbh-service-icon">
+                    <i class="fas fa-t-shirt"></i>
+                </div>
+                <h3>Merchandise Design</h3>
+                <p>Create eye-catching designs for promotional products, apparel, and branded merchandise.</p>
+                <a href="#" class="jbh-service-link">View Details <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="jbh-service-card">
+                <div class="jbh-service-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3>Social Media Graphics</h3>
+                <p>Engage your audience with professionally designed social media posts, covers, and advertisements.</p>
+                <a href="#" class="jbh-service-link">View Details <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="jbh-service-card">
+                <div class="jbh-service-icon">
+                    <i class="fas fa-paint-brush"></i>
+                </div>
+                <h3>Illustration</h3>
+                <p>Custom illustrations and artwork that bring your ideas to life and enhance your visual content.</p>
+                <a href="#" class="jbh-service-link">View Details <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="jbh-graphics-portfolio" id="portfolio">
+        <div class="jbh-section-title">
+            <h2>Our Design Portfolio</h2>
+            <p>Explore our creative work and see how we've helped businesses with stunning visual designs</p>
+        </div>
+        
+        <div class="jbh-portfolio-grid">
+            <div class="jbh-portfolio-item">
+                <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Brand Identity Design" class="jbh-portfolio-img">
+                <div class="jbh-portfolio-overlay">
+                    <h3>Brand Identity</h3>
+                    <p>Complete brand identity for a tech startup</p>
+                    <a href="#" class="jbh-portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="jbh-portfolio-item">
+                <img src="https://images.unsplash.com/photo-1572044162444-ad60f128bdea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Logo Design" class="jbh-portfolio-img">
+                <div class="jbh-portfolio-overlay">
+                    <h3>Logo Design</h3>
+                    <p>Modern logo for a fitness brand</p>
+                    <a href="#" class="jbh-portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="jbh-portfolio-item">
+                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Print Design" class="jbh-portfolio-img">
+                <div class="jbh-portfolio-overlay">
+                    <h3>Print Design</h3>
+                    <p>Brochure and business card design</p>
+                    <a href="#" class="jbh-portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="jbh-portfolio-item">
+                <img src="https://images.unsplash.com/photo-1558655146-364adaf1fcc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Packaging Design" class="jbh-portfolio-img">
+                <div class="jbh-portfolio-overlay">
+                    <h3>Packaging Design</h3>
+                    <p>Premium packaging for luxury products</p>
+                    <a href="#" class="jbh-portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="jbh-portfolio-item">
+                <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Social Media Graphics" class="jbh-portfolio-img">
+                <div class="jbh-portfolio-overlay">
+                    <h3>Social Media Graphics</h3>
+                    <p>Campaign visuals for a restaurant chain</p>
+                    <a href="#" class="jbh-portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="jbh-portfolio-item">
+                <img src="https://images.unsplash.com/photo-1609921212029-bb5a28e60960?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Illustration" class="jbh-portfolio-img">
+                <div class="jbh-portfolio-overlay">
+                    <h3>Custom Illustration</h3>
+                    <p>Character illustrations for a children's book</p>
+                    <a href="#" class="jbh-portfolio-link">View Project <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="jbh-graphics-process">
+        <div class="jbh-section-title">
+            <h2>Our Design Process</h2>
+            <p>We follow a structured approach to ensure your design project is completed efficiently and effectively</p>
+        </div>
+        
+        <div class="jbh-process-steps">
+            <div class="jbh-process-step">
+                <div class="jbh-step-number">1</div>
+                <h3>Discovery</h3>
+                <p>We learn about your business, goals, and design preferences.</p>
+            </div>
+            
+            <div class="jbh-process-step">
+                <div class="jbh-step-number">2</div>
+                <h3>Concept Development</h3>
+                <p>Our designers create initial concepts and mockups.</p>
+            </div>
+            
+            <div class="jbh-process-step">
+                <div class="jbh-step-number">3</div>
+                <h3>Design Revision</h3>
+                <p>We refine the designs based on your feedback.</p>
+            </div>
+            
+            <div class="jbh-process-step">
+                <div class="jbh-step-number">4</div>
+                <h3>Finalization</h3>
+                <p>We prepare the final designs and all necessary files.</p>
+            </div>
+            
+            <div class="jbh-process-step">
+                <div class="jbh-step-number">5</div>
+                <h3>Delivery</h3>
+                <p>We deliver the final products and provide support.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="jbh-graphics-cta" id="contact">
+        <div class="jbh-cta-content">
+            <h2>Ready to Transform Your Visual Identity?</h2>
+            <p>Contact us today to discuss your design project and get a free consultation from our creative team.</p>
+            <div class="jbh-cta-buttons">
+                <a href="#" class="jbh-cta-btn-primary">Start a Project</a>
+                <a href="#portfolio" class="jbh-cta-btn-secondary">View Our Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About JBH Tech</h3>
+                <p>We are a leading design and development company dedicated to creating innovative digital solutions that drive business growth.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/jbhtechinnovation"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/DigitalJbhk"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/jbh-tech-innovation/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/jbh_webstics/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Services</h3>
+                <a href="#">Web Development</a>
+                <a href="#">Custom Website Development</a>
+                <a href="#">Digital Marketing</a>
+                <a href="#">SEO Optimization</a>
+                <a href="#">UI/UX Design</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <a href="#">About Us</a>
+                <a href="#">Services</a>
+                <a href="#portfolio">Project Grid</a>
+                <a href="#contact">Contact Us</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Sec 29 Faridabad, Haryana</p>
+                <p><i class="fas fa-phone"></i> 9990145858</p>
+                <p><i class="fas fa-envelope"></i> jbh.webstics@gmail.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Sat: 9AM-6PM</p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 JBH Tech Innovation. All Rights Reserved.</p>
+                        <p style="margin-top:10px;font-style:italic;font-size:10px;color:#a09f9f;">
+                Powered by The
+                <a href="https://www.google.com/search?q=zeesu+royalist" style="text-decoration:none;color:#979696;">
+                    Zeesu Royalist Company
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.jbh-hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const searchBtns = document.querySelectorAll('.jbh-search-btn');
+            const closeSearch = document.querySelector('.jbh-close-search');
+            const searchModal = document.querySelector('.jbh-search-modal');
+            const servicesDropdown = document.querySelector('.services-dropdown');
+            
+            // Toggle mobile menu
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navLinks.classList.toggle('active');
+            });
+            
+            // Mobile services dropdown toggle
+            if (window.innerWidth <= 768) {
+                servicesDropdown.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A' && e.target.closest('.services-dropdown') && !e.target.closest('.dropdown-list')) {
+                        e.preventDefault();
+                        this.classList.toggle('active');
+                    }
+                });
+            }
+            
+            // Close mobile menu when clicking on a link
+            const navItems = document.querySelectorAll('.nav-links a');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    // Don't close if it's the services dropdown parent link on mobile
+                    if (!this.closest('.services-dropdown') || this.closest('.dropdown-list')) {
+                        hamburger.classList.remove('active');
+                        navLinks.classList.remove('active');
+                    }
+                });
+            });
+            
+            // Search functionality
+            searchBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    searchModal.style.display = 'flex';
+                    document.querySelector('.jbh-search-input').focus();
+                });
+            });
+            
+            closeSearch.addEventListener('click', function() {
+                searchModal.style.display = 'none';
+            });
+            
+            // Close search when clicking outside
+            searchModal.addEventListener('click', function(e) {
+                if (e.target === searchModal) {
+                    searchModal.style.display = 'none';
+                }
+            });
+            
+            // Close search with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && searchModal.style.display === 'flex') {
+                    searchModal.style.display = 'none';
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Animation on scroll
+            function animateOnScroll() {
+                const elements = document.querySelectorAll('.jbh-service-card, .jbh-portfolio-item, .jbh-process-step');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            }
+
+            // Initialize animations
+            document.querySelectorAll('.jbh-service-card, .jbh-portfolio-item, .jbh-process-step').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(30px)';
+                element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            });
+
+            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
+            
+            // Navbar background on scroll
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                    navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.5)';
+                } else {
+                    navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                    navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

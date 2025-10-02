@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBH Tech Innovation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+
+                        height: 70px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4a6cf7;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: #4a6cf7;
+        }
+
+        .services-dropdown {
+            position: relative;
+        }
+
+        .services-dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(26, 26, 26, 0.98);
+            min-width: 600px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin-top: 10px;
+            gap: 30px;
+        }
+
+        .services-dropdown:hover .services-dropdown-content {
+            display: flex; /* sirf hover pe dikhe Fixed By Zeesu.*/
+        }
+
+        .dropdown-column {
+            flex: 1;
+        }
+
+        .dropdown-heading {
+            color: #4a6cf7;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dropdown-list {
+            list-style: none;
+        }
+
+        .dropdown-list li {
+            margin-bottom: 10px;
+        }
+
+        .dropdown-list a {
+            color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .dropdown-list a:hover {
+            background: rgba(74, 108, 247, 0.1);
+            color: #4a6cf7;
+            padding-left: 15px;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .jbh-search-btn, .jbh-contact-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .jbh-search-btn {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid #4a6cf7;
+        }
+
+        .jbh-search-btn:hover {
+            background: #4a6cf7;
+        }
+
+        .jbh-contact-btn {
+            background: #4a6cf7;
+            color: white;
+        }
+
+        .jbh-contact-btn:hover {
+            background: #3a5cd8;
+        }
+
+        .jbh-hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .jbh-hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #ffffff;
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
+        .jbh-hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .jbh-hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .jbh-hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .jbh-mobile-nav-actions {
+            display: none;
+        }
+
+        /* Search Modal */
+        .jbh-search-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .jbh-search-container {
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .jbh-search-input {
+            width: 100%;
+            padding: 20px;
+            font-size: 1.5rem;
+            background: rgba(26, 26, 26, 0.9);
+            border: 2px solid #4a6cf7;
+            border-radius: 10px;
+            color: white;
+            outline: none;
+        }
+
+        .jbh-close-search {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Carousel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .slide-content {
+            max-width: 600px;
+            margin-left: 10%;
+            background: rgba(10, 10, 10, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .slide-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .slide-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+
+        .slide-btn {
+            background-color: #4a6cf7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slide-btn:hover {
+            background-color: #3a5cd8;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .carousel-indicator.active {
+            background: #ffffff;
+        }
+
+        /* Scrolling Text */
+        .scrolling-text-container {
+            background: linear-gradient(90deg, #4a6cf7, #8a94a6);
+            padding: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .scrolling-text {
+            white-space: nowrap;
+            display: flex;
+            animation: scrollText 25s linear infinite;
+        }
+
+        .text-item {
+            display: inline-flex;
+            align-items: center;
+            margin: 0 40px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .text-icon {
+            margin-right: 15px;
+            font-size: 1.5rem;
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #ffffff;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: #4a6cf7;
+            border-radius: 2px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            background: #1a1a1a;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #4a6cf7;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .feature p {
+            color: #b0b0b0;
+        }
+
+        /* About Section */
+        .k-section {
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .k-heading {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 80px;
+            color: #ffffff;
+            position: relative;
+            padding-bottom: 25px;
+        }
+
+        .k-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, #4a6cf7, #8a94a6);
+            border-radius: 3px;
+        }
+
+        .k-about-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            align-items: center;
+        }
+
+        .k-about-image {
+            position: relative;
+        }
+
+        .k-main-img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .k-floating-box {
+            position: absolute;
+            background: linear-gradient(135deg, #4a6cf7, #3a5cd8);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .k-box-1 {
+            top: -20px;
+            right: -20px;
+            width: 150px;
+        }
+
+        .k-box-2 {
+            bottom: 40px;
+            left: -20px;
+            width: 180px;
+            animation-delay: 0.5s;
+        }
+
+        .k-box-3 {
+            bottom: -20px;
+            right: 30px;
+            width: 140px;
+            animation-delay: 1s;
+        }
+
+        .k-box-content {
+            text-align: center;
+            color: white;
+        }
+
+        .k-box-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .k-box-text {
+            font-size: 0.9rem;
+        }
+
+        .k-subtitle {
+            font-size: 1.2rem;
+            color: #4a6cf7;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .k-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .k-text {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #b0b0b0;
+        }
+
+        .k-feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .k-feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .k-feature-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4a6cf7, #3a5cd8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+        }
+
+        .k-feature-text {
+            font-size: 1.1rem;
+            color: #e0e0e0;
+        }
+
+        .k-btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: linear-gradient(90deg, #4a6cf7, #8a94a6);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(74, 108, 247, 0.3);
+        }
+
+        .k-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 108, 247, 0.4);
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 100px 40px;
+            background: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+            position: relative;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .services-header h2 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4a6cf7 0%, #8a94a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .services-header p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card-new {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            padding: 40px 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(74, 108, 247, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-card-new::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(to bottom, #4a6cf7, #8a94a6);
+            transition: height 0.6s ease;
+        }
+
+        .service-card-new:hover::before {
+            height: 100%;
+        }
+
+        .service-card-new:hover {
+            transform: translateY(-10px);
+            border-color: rgba(74, 108, 247, 0.3);
+            box-shadow: 0 15px 35px rgba(74, 108, 247, 0.1);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #4a6cf7 0%, #8a94a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .service-card-new h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .service-card-new p {
+            color: #b0b0b0;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            color: #e0e0e0;
+            margin-bottom: 8px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4a6cf7;
+            font-weight: bold;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            color: #4a6cf7;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: #8a94a6;
+            transform: translateX(5px);
+        }
+
+        .service-link i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 40px;
+            background: #0a0a0a;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #4a6cf7 0%, #8a94a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-info p {
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .contact-details {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .contact-details li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            color: #e0e0e0;
+        }
+
+        .contact-details li i {
+            font-size: 1.5rem;
+            color: #4a6cf7;
+            margin-right: 15px;
+            min-width: 24px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(74, 108, 247, 0.1);
+            color: #4a6cf7;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #4a6cf7;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .contact-form-wrapper {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(74, 108, 247, 0.1);
+        }
+
+        .contact-form-wrapper h3 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .form-group-new {
+            margin-bottom: 25px;
+        }
+
+        .form-group-new label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        .form-group-new input,
+        .form-group-new textarea,
+        .form-group-new select {
+            width: 100%;
+            padding: 15px 20px;
+            background: rgba(10, 10, 10, 0.7);
+            border: 1px solid rgba(74, 108, 247, 0.2);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group-new input:focus,
+        .form-group-new textarea:focus,
+        .form-group-new select:focus {
+            outline: none;
+            border-color: #4a6cf7;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+        }
+
+        .form-group-new textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #4a6cf7 0%, #8a94a6 100%);
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(74, 108, 247, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            padding: 40px;
+            text-align: center;
+            color: #b0b0b0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #4a6cf7;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2a2a2a;
+            color: #ffffff;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: #4a6cf7;
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scrollText {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(10, 10, 10, 0.98);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px;
+                transition: left 0.3s ease;
+                overflow-y: auto;
+                gap: 15px;
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .jbh-mobile-nav-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            .jbh-mobile-nav-actions button {
+                width: 100%;
+            }
+
+            .jbh-hamburger {
+                display: flex;
+            }
+
+            .services-dropdown-content {
+                position: static;
+                display: none;
+                flex-direction: column;
+                min-width: auto;
+                padding: 20px;
+                margin-top: 10px;
+                background: rgba(26, 26, 26, 0.8);
+            }
+
+            .services-dropdown.active .services-dropdown-content {
+                display: flex;
+            }
+
+            .carousel-container {
+                height: 60vh;
+            }
+
+            .slide-content {
+                margin: 0 5%;
+                padding: 20px;
+            }
+
+            .slide-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-title, .k-heading {
+                font-size: 2rem;
+            }
+
+            .services-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .k-floating-box {
+                position: relative;
+                margin: 15px 0;
+                animation: none;
+                left: 0 !important;
+                right: 0 !important;
+                top: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .slide-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .text-item {
+                font-size: 1rem;
+            }
+
+            .k-title {
+                font-size: 1.8rem;
+            }
+
+            .contact-info h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#">
+                <img src="image/logo (2).png" alt="JBH Tech Logo" class="logo-img">
+            </a>
+        </div>
+    
+        <ul class="nav-links">
+            <li><a href="about.html">About Us</a></li>
+            <li class="services-dropdown">
+                <a href="Custom website.html">Services <i class="fa fa-caret-down"></i></a>
+                <div class="services-dropdown-content">
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-laptop-code"></i> Website Development
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="ui.html"><i class="fas fa-code"></i> Custom Website Development</a></li>
+                            <li><a href="ecommerce.html"><i class="fas fa-shopping-cart"></i> E-commerce Solutions</a></li>
+                            <li><a href="web app .html"><i class="fas fa-cogs"></i> Web Application Development</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-paint-brush"></i> Design
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="Graphic.html"><i class="fas fa-palette"></i> Graphics Design</a></li>
+                            <li><a href="ui.html"><i class="fas fa-layer-group"></i> UI/UX Design</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="dropdown-column">
+                        <div class="dropdown-heading">
+                            <i class="fas fa-chart-line"></i> Marketing
+                        </div>
+                        <ul class="dropdown-list">
+                            <li><a href="seo.html"><i class="fas fa-search"></i> SEO Services</a></li>
+                            <li><a href="ads.html"><i class="fab fa-facebook"></i> Social Media Marketing</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li><a href="project Grid.html">Project Grid</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+    
+            <div class="jbh-mobile-nav-actions">
+                <button class="jbh-search-btn"><i class="fas fa-search"></i> Search</button>
+                <button class="jbh-contact-btn">Contact Us</button>
+            </div>
+        </ul>
+    
+        <div class="nav-actions">
+            <button class="jbh-search-btn"><i class="fas fa-search"></i></button>
+            <button class="jbh-contact-btn">Contact Us</button>
+        </div>
+    
+        <div class="jbh-hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    
+    <!-- Search Modal -->
+    <div class="jbh-search-modal">
+        <div class="jbh-search-container">
+            <input type="text" class="jbh-search-input" placeholder="Search...">
+            <button class="jbh-close-search"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+
+    <!-- Carousel -->
+    <div class="carousel-container">
+        <div class="carousel-slide active" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=1200');">
+            <div class="slide-content">
+                <h2>Innovative Business Solutions</h2>
+                <p>Modern & Digital IT solutions tailored for your technology business</p>
+                <button class="slide-btn">Learn More</button>
+            </div>
+        </div>
+        
+        <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=1200');">
+            <div class="slide-content">
+                <h2>Global Technology Expertise</h2>
+                <p>Leverage our worldwide network of experts to solve your most complex technology challenges.</p>
+                <button class="slide-btn">Our Services</button>
+            </div>
+        </div>
+        
+        <div class="carousel-slide" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200');">
+            <div class="slide-content">
+                <h2>Digital Transformation</h2>
+                <p>Embrace the future with our comprehensive digital transformation strategies and implementation.</p>
+                <button class="slide-btn">Get Started</button>
+            </div>
+        </div>
+        
+        <div class="carousel-nav">
+            <div class="carousel-indicator active" data-slide="0"></div>
+            <div class="carousel-indicator" data-slide="1"></div>
+            <div class="carousel-indicator" data-slide="2"></div>
+        </div>
+    </div>
+    
+    <!-- Scrolling Text -->
+    <div class="scrolling-text-container">
+        <div class="scrolling-text">
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>Digital Marketing</span></div>
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>App Development</span></div>
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>Web Development</span></div>
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>SEO</span></div>
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>Graphic Designing</span></div>
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>24/7 Support</span></div>
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>Digital Marketing</span></div>
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>App Development</span></div>
+            <div class="text-item"><i class="fas fa-check-circle text-icon"></i><span>Web Development</span></div>
+        </div>
+    </div>
+    
+    <!-- About Section -->
+    <section class="k-section" id="about">
+        <h2 class="k-heading">About Us</h2>
+        
+        <div class="k-about-container">
+            <div class="k-about-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600" alt="JBH Tech Team" class="k-main-img">
+                
+                <div class="k-floating-box k-box-1">
+                    <div class="k-box-content">
+                        <div class="k-box-number">5+</div>
+                        <div class="k-box-text">Years Experience</div>
+                    </div>
+                </div>
+                
+                <div class="k-floating-box k-box-2">
+                    <div class="k-box-content">
+                        <div class="k-box-number">150+</div>
+                        <div class="k-box-text">Projects Completed</div>
+                    </div>
+                </div>
+                
+                <div class="k-floating-box k-box-3">
+                    <div class="k-box-content">
+                        <div class="k-box-number">100%</div>
+                        <div class="k-box-text">Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="k-about-content">
+                <p class="k-subtitle">About Our Company</p>
+                <h3 class="k-title">We Provide Innovative IT Solutions For Business Success</h3>
+                <p class="k-text">JBH Tech Innovation is a leading technology company specializing in digital transformation, software development, and IT consulting services. Our team of experts is dedicated to delivering cutting-edge solutions that drive growth and efficiency.</p>
+                
+                <ul class="k-feature-list">
+                    <li class="k-feature-item">
+                        <div class="k-feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="k-feature-text">Custom software development</span>
+                    </li>
+                    <li class="k-feature-item">
+                        <div class="k-feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="k-feature-text">Cloud computing solutions</span>
+                    </li>
+                    <li class="k-feature-item">
+                        <div class="k-feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="k-feature-text">Data analytics & AI integration</span>
+                    </li>
+                    <li class="k-feature-item">
+                        <div class="k-feature-icon"><i class="fas fa-check"></i></div>
+                        <span class="k-feature-text">Cybersecurity services</span>
+                    </li>
+                </ul>
+                
+                <a href="#services" class="k-btn">Discover More</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="services-header">
+            <h2>Our Premium Services</h2>
+            <p>We offer a comprehensive range of IT solutions designed to propel your business into the digital future with cutting-edge technology and innovative approaches.</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card-new">
+                <i class="fas fa-laptop-code service-icon"></i>
+                <h3>Web Development</h3>
+                <p>Custom websites and web applications built with the latest technologies to ensure optimal performance and user experience.</p>
+                <ul class="service-features">
+                    <li>Responsive Design</li>
+                    <li>E-commerce Solutions</li>
+                    <li>CMS Integration</li>
+                    <li>Progressive Web Apps</li>
+                </ul>
+                <a href="#contact" class="service-link">Explore Service <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="service-card-new">
+                <i class="fas fa-mobile-alt service-icon"></i>
+                <h3>App Development</h3>
+                <p>Native and cross-platform mobile applications designed to engage users and deliver exceptional functionality.</p>
+                <ul class="service-features">
+                    <li>iOS & Android Development</li>
+                    <li>Cross-Platform Solutions</li>
+                    <li>UI/UX Focused Design</li>
+                    <li>App Store Optimization</li>
+                </ul>
+                <a href="#contact" class="service-link">Explore Service <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="service-card-new">
+                <i class="fas fa-chart-line service-icon"></i>
+                <h3>Digital Marketing</h3>
+                <p>Comprehensive digital marketing strategies to increase your online visibility and drive business growth.</p>
+                <ul class="service-features">
+                    <li>Search Engine Optimization</li>
+                    <li>Social Media Marketing</li>
+                    <li>Content Strategy</li>
+                    <li>Analytics & Reporting</li>
+                </ul>
+                <a href="#contact" class="service-link">Explore Service <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="service-card-new">
+                <i class="fas fa-search service-icon"></i>
+                <h3>SEO Optimization</h3>
+                <p>Search engine optimization services to improve your website's ranking and attract more organic traffic.</p>
+                <ul class="service-features">
+                    <li>Keyword Research</li>
+                    <li>On-Page Optimization</li>
+                    <li>Technical SEO Audit</li>
+                    <li>Local SEO Strategies</li>
+                </ul>
+                <a href="#contact" class="service-link">Explore Service <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="service-card-new">
+                <i class="fas fa-paint-brush service-icon"></i>
+                <h3>UI/UX Design</h3>
+                <p>User-centered design solutions that create intuitive and engaging experiences for your customers.</p>
+                <ul class="service-features">
+                    <li>User Research</li>
+                    <li>Wireframing & Prototyping</li>
+                    <li>Interaction Design</li>
+                    <li>Usability Testing</li>
+                </ul>
+                <a href="#contact" class="service-link">Explore Service <i class="fas fa-arrow-right"></i></a>
+            </div>
+            
+            <div class="service-card-new">
+                <i class="fas fa-cogs service-icon"></i>
+                <h3>Software Development</h3>
+                <p>It is the process of designing and implementing a software solution to satisfy a user.</p>
+                <ul class="service-features">
+                    <li>Custom Software Solutions</li>
+                    <li>API Development & Integration</li>
+                    <li>Cloud-Based Applications</li>
+                    <li>Maintenance & Support</li>
+                </ul>
+                <a href="#contact" class="service-link">Explore Service <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="content-section">
+        <h2 class="section-title">Why Choose Us?</h2>
+        
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-lightbulb"></i></div>
+                <h3>Innovation</h3>
+                <p>Pioneering new approaches and technologies to stay ahead of the curve.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Partnership</h3>
+                <p>Building long-term relationships based on trust and mutual success.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Growth</h3>
+                <p>Focused on delivering measurable results and sustainable growth.</p>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon"><i class="fas fa-award"></i></div>
+                <h3>Excellence</h3>
+                <p>Committed to the highest standards of quality and service.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Get In Touch With Us</h2>
+                <p>Have a project in mind or need expert consultation? Reach out to our team and let's discuss how we can help transform your ideas into reality.</p>
+                
+                <ul class="contact-details">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Sec 29 Faridabad, Haryana</span></li>
+                    <li><i class="fas fa-phone"></i><span>9990145858</span></li>
+                    <li><i class="fas fa-envelope"></i><span>jbh.webstics@gmail.com</span></li>
+                    <li><i class="fas fa-clock"></i><span>Mon-Sat: 9AM - 6PM</span></li>
+                </ul>
+                
+                <div class="social-links">
+                    <a href="https://www.facebook.com/jbhtechinnovation"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/DigitalJbhk"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/jbh-tech-innovation/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/jbh_webstics/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="contact-form-wrapper">
+                <h3>Send Us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-group-new">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group-new">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email address" required>
+                    </div>
+                    
+                    <div class="form-group-new">
+                        <label for="service">Service Interested In</label>
+                        <select id="service" required>
+                            <option value="">Select a service</option>
+                            <option value="web-development">Web Development</option>
+                            <option value="app-development">App Development</option>
+                            <option value="digital-marketing">Digital Marketing</option>
+                            <option value="seo">SEO Optimization</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="software">Software Development</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group-new">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" placeholder="Tell us about your project requirements" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>JBH Tech Innovation</h3>
+                <p>Transforming businesses through innovative technology solutions and digital expertise.</p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/jbhtechinnovation"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/DigitalJbhk"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/company/jbh-tech-innovation/"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com/jbh_webstics/"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="web app .html">Web Development</a></li>
+                    <li><a href="Custom website.html">Custom Website Development</a></li>
+                    <li><a href="ads.html">Digital Marketing</a></li>
+                    <li><a href="seo.html">SEO Optimization</a></li>
+                    <li><a href="ui.html">UI/UX Design</a></li>
+                    <li><a href="Graphic.html">Graphic Designing</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="ecommerce.html">Services</a></li>
+                    <li><a href="project Grid.html">Project Grid</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="https://www.google.com/search?q=zeesu+royalist">Google</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-map-marker-alt"></i> Sec 29 Faridabad, Haryana</li>
+                    <li><i class="fas fa-phone"></i> 9990145658</li>
+                    <li><i class="fas fa-envelope"></i> jbh.webstics@gmail.com</li>
+                    <li><i class="fas fa-clock"></i> Mon-Sat: 9AM - 6PM</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 JBH Tech Innovation. All Rights Reserved.</p>
+                        <p style="margin-top:10px;font-style:italic;font-size:10px;color:#a09f9f;">
+                Powered by The
+                <a href="https://www.google.com/search?q=zeesu+royalist" style="text-decoration:none;color:#979696;">
+                    Zeesu Royalist Company
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        // Auto advance carousel
+        setInterval(nextSlide, 5000);
+
+        // Indicator click events
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => showSlide(index));
+        });
+
+        // Hamburger menu
+        const hamburger = document.querySelector('.jbh-hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const servicesDropdown = document.querySelector('.services-dropdown');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Mobile services dropdown toggle
+        if (window.innerWidth <= 900) {
+            servicesDropdown.addEventListener('click', (e) => {
+                if (e.target.tagName === 'A') {
+                    e.preventDefault();
+                    servicesDropdown.classList.toggle('active');
+                }
+            });
+        }
+
+        // Close menu when clicking links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (!link.parentElement.classList.contains('services-dropdown')) {
+                    hamburger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Search modal
+        const searchBtns = document.querySelectorAll('.jbh-search-btn');
+        const searchModal = document.querySelector('.jbh-search-modal');
+        const closeSearch = document.querySelector('.jbh-close-search');
+
+        searchBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                searchModal.style.display = 'flex';
+                document.querySelector('.jbh-search-input').focus();
+            });
+        });
+
+        closeSearch.addEventListener('click', () => {
+            searchModal.style.display = 'none';
+        });
+
+        searchModal.addEventListener('click', (e) => {
+            if (e.target === searchModal) {
+                searchModal.style.display = 'none';
+            }
+        });
+
+        // Contact form submission
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            e.target.reset();
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
